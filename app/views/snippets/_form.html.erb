@@ -1,0 +1,93 @@
+<!-- <%= form_for @snippet, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :heading, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :heading, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= label_tag "Resource URL", nil,  :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :absolute_url, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area' , :size => "40*6"%>
+    </div>
+  </div>
+  <!-- <div class="control-group">
+    <%= f.label :image_url, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :image_url, :class => 'text_field' %>
+    </div>
+  </div> -->
+
+  <!-- <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                snippets_path, :class => 'btn' %>
+  </div>
+<% end %> -->
+<%unless params[:action] == "edit"%>
+	<div class="alert alert-info">
+	  <button type="button" class="close" data-dismiss="alert">×</button>
+	  <strong>Have you ever thought? oh! I had solved this issue before using a blog but can't find it again :(</strong><br /> 
+	  Don't worry, start using Snippet Monkey to back up your resource URLs here for future development.<br />
+	  You can search and find or share it with your friends when you come across the same issue again.
+	</div>
+<%end%>
+
+<form class="form-vertical" method="POST" action="/snippets" accept-charset="UTF-8">
+	<legend>Submit Resource</legend>
+	<div class="control-group">
+		<label for="heading" class="control-label">Resource Heading *</label>
+		<div class="controls">
+			<input placeholder="How to call this resource?" class="span8" type="text" name="heading" id="heading" value="<%= @snippet.heading%>"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="absolute_url" class="control-label">Resource URL *</label>
+		<div class="controls">
+			<input placeholder="Enter the resource URL" class="span8" type="text" name="absolute_url" id="absolute_url" value="<%= @snippet.absolute_url%>"/>
+		</div>
+	</div>	
+	<div class="control-group">
+		<label for="security" class="control-label">Privacy Type *</label>
+		<div class="btn-group" data-toggle-name="security" data-toggle="buttons-radio" >
+		  <button type="button" value="public" class="btn active" data-toggle="button">public</button>
+		  <button type="button" value="private" class="btn" data-toggle="button">private</button>
+		</div>
+		<input id="privacy_field" type="hidden" name="security" value="public" />
+	</div>
+
+	<div class="control-group">
+		<label for="technology" class="control-label">Select Technology *</label>
+		<div class="controls">
+		<select class="span4" themeroller="true" less-var="@headingsFontWeight" placeholder="bold" name="technology_id">
+		  <%Technology.all.each do |technology|%>
+		  	<%selected = (@snippet.technology_id == technology.id) ? "selected" : ""%>
+		  	<option value=<%= technology.id%> selected=<%= selected%>><%= technology.name%></option>
+		  <%end%>
+		</select>
+		</div> 
+	</div>
+	<div class="control-group">
+		<label for="description" class="control-label">Description about the Resource </label>
+		<div class="controls">
+			<textarea placeholder="Enter resource description" rows="2" class="span8" name="description" id="description" cols="50" value="<%= @snippet.description%>"></textarea>
+		</div>
+		<div class="form-actions"><button class="btn-primary btn" type="submit">Save Snipp</button> <a href="/snippets" class="btn">Cancel</a></div>
+	</div>
+</form>
+<script type="text/javascript">
+	jQuery(function($) {
+	  $('div.btn-group').children().map(function(){
+	  	
+		$(this).click(function(){
+			$("#privacy_field").val($(this).text());
+		});
+	  });
+	});	
+</script>

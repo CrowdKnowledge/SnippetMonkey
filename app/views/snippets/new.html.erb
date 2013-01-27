@@ -1,0 +1,8 @@
+<%- model_class = Snippet -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
+                                 :default => "New #{model_class.model_name.human}") %>
+  	<span class="label label-info">New</span>
+</h1>
+</div>
+<%= render :partial => 'form' %>

@@ -1,0 +1,90 @@
+
+<%- model_class = Snippet -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => "Resources" %>
+  <%if params[:security]%>
+  	<%icon_type = (params[:security] == "public") ? "success" : "important"%>
+  	<span class="label label-<%= icon_type%>"><%= params[:security]%></span>
+  <%else%>
+  	<span class="label label-warning">global</span>
+  <%end%>
+  </h1>
+
+</div>
+<!-- <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_snippet_path,
+            :class => 'btn btn-primary' %> -->
+<%if Snippet.count == 0%>
+    <div class="alert alert-error">
+        <button data-dismiss="alert" class="close">&times;</button>
+        <strong>Hey Buddy! You resource list is empty.</strong> You could add resources by using the New tab.
+    </div>
+    <%= image_tag "empty_monkey.jpg"%>
+<%else%>
+
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <!-- <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @snippets.each do |snippet| %>
+			      <tr onclick="location.href='<%= snippet_path(snippet)%>'">
+				 		<div class="row">
+				 			<p class="text-info">
+								<h2><%= image_tag "face-monkey.png"%>
+									<%= link_to truncate(snippet.heading.capitalize, :length => 15, :omission => '...(continued)'), snippet_path(snippet), :class => "text-info"%>
+							        <%if snippet.security == "public"%>
+							        	<span class="label label-success"><%= snippet.security%></span>
+							       	<%else%>
+							       		<span class="label label-important"><%= snippet.security%></span>
+							       	<%end%>
+								</h2>
+							</p>
+							<div class="span3">
+								<p class="lead"> <h4>Resource :	</h4></p>
+								<p>
+								<a href=<%= snippet.absolute_url%>><span class="label label-info">Navigate To Resource</span></a>
+								</p>
+								<p class="muted">
+									Resource created on:
+								</p>
+								<p><i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%></p>
+							</div>
+							<div class="span3">
+								<p class="lead"> <h4>Description :	</h4></p>
+								<p><%= truncate(snippet.description, :length => 50, :omission => '...(more)')%></p>
+								<p><a href=<%= snippet_path(snippet)%>><span class="label label-error">Read Description</span></a>
+							</div>
+							<div class="span3">
+								<p class="lead"> <h4>Technology :	</h4></p>
+								<p><%= image_tag snippet.technology.icon_path%></p>						
+							</div><br />
+							<div class="span9">
+								<p><strong>Actions : </strong>
+								    	<a href=<%= edit_snippet_path(snippet)%>><i class="icon-edit"></i><span class="label label-info"></span> </a> 
+								    	<a href=<%= delete_resource_snippet_path(snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
+								    	<a href="#"><i class="icon-comment"></i><span class="label label-info"></span> </a>
+								    	| <i class="icon-user"></i> <a href="#">Admin</a> 
+								    	| <i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%>
+								     	| <i class="icon-comment"></i> <a href="#">3 Comments</a>
+								       	| <i class="icon-share"></i> <a href="#">39 Shares</a>
+								</p>
+							</div>
+						</div>
+			      </tr>
+					<%= social_share_button_tag(snippet.heading, :rel => "twipsy", :url => share_resource_snippet_url(snippet)) %></p>
+			      <div class="span9"> <hr/></div>
+	    <% end %>
+	  </tbody>
+	</table>
+
+<%end%>
+
