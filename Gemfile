@@ -27,6 +27,10 @@ gem "grabzit", "~> 1.1.0"
 gem "hashie"
 gem 'social-share-button'
 gem 'kaminari'
+gem 'devise'
+gem 'time_diff'
+gem 'omniauth'
+gem 'omniauth-facebook'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

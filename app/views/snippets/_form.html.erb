@@ -30,14 +30,13 @@
                 snippets_path, :class => 'btn' %>
   </div>
 <% end %> -->
-<%unless params[:action] == "edit"%>
+   <% message = (params[:action] == "edit")? "edit" : "create"%>
 	<div class="alert alert-info">
 	  <button type="button" class="close" data-dismiss="alert">×</button>
-	  <strong>Have you ever thought? oh! I had solved this issue before using a blog but can't find it again :(</strong><br /> 
-	  Don't worry, start using Snippet Monkey to back up your resource URLs here for future development.<br />
-	  You can search and find or share it with your friends when you come across the same issue again.
-	</div>
-<%end%>
+	  <strong>Yeah! </strong>You can <%= message%> your snippets here.<br />
+	  Play with monkey. Save your resources. Njoy :) 
+	 </div>
+
 
 <form class="form-vertical" method="POST" action="/snippets" accept-charset="UTF-8">
 	<legend>Submit Resource</legend>

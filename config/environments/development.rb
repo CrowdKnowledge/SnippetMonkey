@@ -13,6 +13,19 @@ SniptMonkey::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+=begin
+  This is the action mailer configuration 
+=end
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 =>  587,
+    :domain               => 'www.gmail.com',
+    :user_name            => 'team.snippet.monkey@gmail.com',
+    :password             => 'matrixreloaded',
+    :authentication       => 'plain',
+    :enable_starttls_auto => true  }
+    
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
@@ -21,7 +34,7 @@ SniptMonkey::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
-
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
   #config.assets.precompile += %w( jquery.jtable.min.js jtable.min.css)

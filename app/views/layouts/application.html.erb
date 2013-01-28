@@ -19,33 +19,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#"><%= image_tag "monkey_logo.png", :width => "70", :height => "70"%>Snippet Monkey</a>
-        
-		<div class="nav-collapse">
-		        <ul class="nav" style="padding-top: 24px;">
-		        <!-- <li class="active"><a href="/snippets"><i class="icon-th-list"></i> Snipps</a></li> -->
-		        <li class=""><a href="/snippets"><i class="icon-home"></i> Monkey Space</a></li>
-		        <ul class="nav">
-		          <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i> Resources <b class="caret"></b></a>
-		          <ul class="dropdown-menu">
-		            <li class=""><a href="/snippets?security=public"><i class="icon-share"></i> My Public</a></li>
-		            <li class=""><a href="/snippets?security=private"><i class="icon-lock"></i> My Private</a></li>
-		            <li class=""><a href="/snippets"><i class="icon-globe"></i> Global</a></li>
-		          </ul>
-		          </li>
-		        </ul>
-		        <li class=""><a href="/snippets/new"><i class="icon-plus-sign"></i> Create</a></li>
-		        <li class=""><a href="/snippets/about"><i class="icon-info-sign"></i> About</a></li>
-		
-		        </ul>
-		        <form class="navbar-form form-search pull-right" method="POST" action="/snippets/search" accept-charset="UTF-8">
-		          <div class="input-append" style="padding-top: 27px;">
-		            <input type="text" name="q" class="span2 search-query" placeholder="Search Keyword">
-		            <button type="submit" class="btn-primary btn"><i class="icon-search"></i></button>
-		          </div>
-		        </form>
-		      </div><!--/.nav-collapse -->
-
+        <a id="logo" class="brand" href="#"><%= image_tag "monkey_logo.png", :width => "70", :height => "70"%>Snippet Monkey</a>
+        <%if user_signed_in?%>
+			<%= render 'layouts/navigation'%>
+		<%end%>
       </div>
     </div>
   </div>
@@ -54,28 +31,79 @@
     <div class="row">
       <div class="span9">
     <%flash.map do |key,value|%>
-		<div class="alert alert-<%= key%>">
-		  <button type="button" class="close" data-dismiss="alert">×</button>
-		  <%case key%>
-		  	<%when "info"%>
-		  		<%flash_string_text = "Hey Buddy,"%>
-		  	<%when "error"%>
-		  		<%flash_string_text = "Oops! Some thing wrong :("%>
-		  <%end%>
-		  <strong><%= flash_string_text%></strong>
-		  <%= value%>
-		</div>
+	    <%if user_signed_in?%>
+			<div class="alert alert-<%= key%>">
+			  <button type="button" class="close" data-dismiss="alert">×</button>
+			  <%case key%>
+			  	<%when "info"%>
+			  		<%flash_string_text = "Hey Buddy,"%>
+			  	<%when "error"%>
+			  		<%flash_string_text = "Oops! Some thing wrong :("%>
+			  <%end%>
+			  <strong><%= flash_string_text%></strong>
+			  <%= value%>
+			</div>
+		<%else%>
+			<div id="alert_info" class="alert alert-info">
+				<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
+				<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
+			</div>
+			<div id="alert_error" class="alert alert-error">
+			</div>
+			<div id="alert_success" class="alert alert-success">
+			</div>
+		<%end%>
 	<%end%>
-      	<%= yield %>
+		 <%if user_signed_in?%>
+      		<%= yield %>
+      	 <%else%>
+      	 	<%= yield :session_out_view%>
+      	 <%end%>
       	</div>
-      <div class="span3">
-      	<%= image_tag "CodeMonkeySketch.jpg"%>
-      </div>
+      
+      	<%if user_signed_in?%>
+      		<div class="span3">
+      			<%= image_tag "CodeMonkeySketch.jpg"%>
+      		</div>
+      	<%else%>
+      		<div class="span9">
+      			<%= image_tag "monkey_logo.png", :width => "60%", :height => "60%"%>
+      			<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
+      				<a class="btn btn-primary" data-toggle="modal" href="#myModal" >Wana Join?</a>
+      			<%end%>
+      		</div>
+      	<%end%>
+      
     </div>
   </div>
-  
+ 
 
 </body>
+<div class="footer"></div>
 </html>
 
-
+<script>
+	document.getElementById("logo").onmouseover = function() {
+	    this.style.backgroundColor = "#009ACD";
+	}
+	document.getElementById("logo").onmouseout = function() {
+	    this.style.backgroundColor = "";
+	}
+</script>
+<script>
+	$("#alert_info").show();
+	$("#alert_error").hide();
+	$("#alert_success").hide();
+	<%if flash[:account_activation_success]%>
+		$("#alert_info").hide();
+		$("#alert_error").hide();
+		$("#alert_success").show();
+		$("#alert_success").html("<%= flash[:account_activation_success]%>")
+	<%end%>
+	<%if flash[:account_activation_fail]%>
+		$("#alert_info").hide();
+		$("#alert_error").show();
+		$("#alert_error").html("<%= flash[:account_activation_fail]%>")
+		$("#alert_success").hide();
+	<%end%>
+</script>

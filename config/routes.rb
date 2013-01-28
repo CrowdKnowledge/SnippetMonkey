@@ -1,12 +1,29 @@
 SniptMonkey::Application.routes.draw do
+  
   resources :snippets do
     member do
       get 'delete_resource'
       get 'share_resource'
+      post 'add_snippet_comment'
     end
   end
   
-
+  devise_for :users, :controllers => { :sessions => "users/sessions" , :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
+ devise_scope :user do
+   get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+   get "users/sign_out", :to => "users/sessions#destroy"
+   match "/user/sign_up", :to => "users/registrations#sign_up", :via => :post
+   match "/user/sign_up_form", :to => "users/registrations#new"
+   get "forgot_password", :to => "users/sessions#forgot_password"
+   post "recover_password", :to => "users/sessions#recover_password"
+   match "/update_password/:id", :to => "users/sessions#update_password", :via => :post, :as => :update_password
+   match "/users/edit_password/:id" => "users/sessions#edit_password", :via => :get, :as => :edit_password
+   match "/snippet_monkey/users/activate_account/(:confirmation_token)" => "users/registrations#activate_account", :via => :get, :as => :user_account_activation
+   post "verify_account_confirmation", :to => "users/sessions#verify_account_confirmation"
+ end
+ 
+ root :to => 'snippets#index'
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

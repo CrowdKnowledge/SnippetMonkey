@@ -1,11 +1,17 @@
 class SnippetsController < ApplicationController
+  
+  before_filter :authenticate_user!#, :except => :create
   # GET /snippets
   # GET /snippets.json
   def index
     if params[:security]
-      @snippets = Snippet.where(:security => params[:security]).order('id DESC')
+      if params[:security] == "global"
+        @snippets = Snippet.order("id DESC").page(params[:page]).includes(:user, :comments).where(:user_id => current_user.id)
+      else
+        @snippets = Snippet.order("id DESC").page(params[:page]).includes(:user, :comments).where(:security => params[:security], :user_id => current_user.id)
+      end
     else
-      @snippets = Snippet.all(:order => 'id DESC')
+      @snippets = Snippet.order("id DESC").page(params[:page]).includes(:user, :comments).where(:security => "public")
     end
 
     respond_to do |format|
@@ -50,7 +56,8 @@ class SnippetsController < ApplicationController
                       :absolute_url => params[:absolute_url],
                       :description => params[:description],
                       :heading => params[:heading],
-                      :security => params[:security])
+                      :security => params[:security],
+                      :user_id => current_user.id)
       redirect_to snippets_path
     rescue Exception => e
       flash[:error] = e.message
@@ -85,6 +92,19 @@ class SnippetsController < ApplicationController
       format.html { redirect_to snippets_url, info: 'Resource was successfully deleted.'}
       format.json { head :no_content }
     end
+  end
+  
+  #Add comment to snippet
+  def add_snippet_comment
+    @snippet = Snippet.find(params[:id])
+    @snippet.comments.create!(:user_id => current_user.id,
+                              :message => params[:message])
+    redirect_to snippets_path
+    flash[:info] = "Successfully added a comment to #{@snippet.heading}."
+  end
+  
+  def share_resource
+    mmmmmmmmmmmmmmm
   end
   
   private

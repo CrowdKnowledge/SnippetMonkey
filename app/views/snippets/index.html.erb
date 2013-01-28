@@ -8,8 +8,16 @@
   <%else%>
   	<span class="label label-warning">global</span>
   <%end%>
-  </h1>
 
+  </h1>
+<%unless params[:action] == "edit"%>
+	<div class="alert alert-info">
+	  <button type="button" class="close" data-dismiss="alert">×</button>
+	  <strong>Have you ever thought? oh! I had solved this issue before using a blog but can't find it again :(</strong><br /> 
+	  Don't worry, start using Snippet Monkey to back up your resource URLs here for future development.<br />
+	  You can search and find or share it with your friends when you come across the same issue again.
+	</div>
+<%end%>
 </div>
 <!-- <%= link_to t('.new', :default => t("helpers.links.new")),
             new_snippet_path,
@@ -21,7 +29,7 @@
     </div>
     <%= image_tag "empty_monkey.jpg"%>
 <%else%>
-
+	<%= render "layouts/pagination"%>
 	<table class="table table-striped">
 	  <thead>
 	    <tr>
@@ -57,6 +65,11 @@
 									Resource created on:
 								</p>
 								<p><i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%></p>
+								<p class="muted">
+									Authored By:
+								</p>
+								<p><i class="icon-envelope"></i> <%= snippet.user.email%></p>
+
 							</div>
 							<div class="span3">
 								<p class="lead"> <h4>Description :	</h4></p>
@@ -65,26 +78,70 @@
 							</div>
 							<div class="span3">
 								<p class="lead"> <h4>Technology :	</h4></p>
-								<p><%= image_tag snippet.technology.icon_path%></p>						
-							</div><br />
+								<p><%= image_tag snippet.technology.icon_path, :width => "80", :height => "80"%></p>						
+							</div><br /><br />
 							<div class="span9">
 								<p><strong>Actions : </strong>
 								    	<a href=<%= edit_snippet_path(snippet)%>><i class="icon-edit"></i><span class="label label-info"></span> </a> 
 								    	<a href=<%= delete_resource_snippet_path(snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
-								    	<a href="#"><i class="icon-comment"></i><span class="label label-info"></span> </a>
-								    	| <i class="icon-user"></i> <a href="#">Admin</a> 
+								    	<a id="comment_icon" data-toggle="modal" href="#comment_modal"><i class="icon-comment"></i><span class="label label-info"></span> </a>
+								    	| <i class="icon-user"></i> <a href="#"><%= snippet.user.first_name%></a> 
 								    	| <i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%>
-								     	| <i class="icon-comment"></i> <a href="#">3 Comments</a>
+								     	| <i class="icon-comment"></i> <a href="#"><%= snippet.comments.size%> Comments</a>
 								       	| <i class="icon-share"></i> <a href="#">39 Shares</a>
 								</p>
+
+								<div id="comment_modal" class="modal hide fade">
+									<div class="modal-header">
+									<button class="close" data-dismiss="modal">×</button>
+									<h3>Type a Comment</h3>
+									</div>
+									<div class="modal-body">
+									    <div class="span4 well">
+									    <form accept-charset="UTF-8" action="<%= add_snippet_comment_snippet_path(snippet)%>" method="POST">
+									    <textarea class="span4" id="new_message" name="message"
+									    placeholder="Type in your comment" rows="5"></textarea>
+									    <h6 class="pull-right">Remaining<div id="chars">320</div></h6>
+									    <button class="btn btn-info" type="submit">Post Comment</button>
+									    </form>
+									    </div>
+									</div>
+								</div>
+
+
+
 							</div>
 						</div>
 			      </tr>
-					<%= social_share_button_tag(snippet.heading, :rel => "twipsy", :url => share_resource_snippet_url(snippet)) %></p>
+					<%= social_share_button_tag(snippet.heading, :rel => "twipsy", :url => snippet_url(snippet)) %></p>
 			      <div class="span9"> <hr/></div>
 	    <% end %>
 	  </tbody>
 	</table>
-
+	<%= render "layouts/pagination"%>
 <%end%>
+<script>
+$(document).ready(function(){
+	var elem = $("#chars");
+	$("#new_message").limiter(320, elem);
+});
+		(function($) {
+	    $.fn.extend( {
+	        limiter: function(limit, elem) {
+	            $(this).on("keyup focus", function() {
+	                setCount(this, elem);
+	            });
+	            function setCount(src, elem) {
+	                var chars = src.value.length;
+	                if (chars > limit) {
+	                    src.value = src.value.substr(0, limit);
+	                    chars = limit;
+	                }
+	                elem.html( limit - chars );
+	            }
+	            setCount($(this)[0], elem);
+	        }
+	    });
+	})(jQuery);
 
+</script>

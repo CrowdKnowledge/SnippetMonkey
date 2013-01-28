@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
-  
+  #protect_from_forgery
 =begin
   This function is used to generate random number. 
 =end
@@ -8,5 +7,21 @@ class ApplicationController < ActionController::Base
     require 'securerandom'
     "#{SNIPPET_FOLDER}#{SecureRandom.urlsafe_base64(32)}#{Time.now.to_s}.jpg"
   end
-
+  
+=begin
+  This function is used to clear all flash. 
+=end 
+  def clear_all_flash
+    flash[:notice] = flash[:alert] = flash[:error] = nil
+  end 
+  
+ 
+=begin
+  This function is used set the confirmation token.
+  Used for creating confirmation token on user creation.
+=end  
+  def set_confirmation_token
+    SecureRandom.hex(16)
+  end
+  
 end
