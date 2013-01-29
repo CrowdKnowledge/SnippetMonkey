@@ -51,13 +51,17 @@ class SnippetsController < ApplicationController
   # POST /snippets.json
   def create
     begin
+      if params[:absolute_url].blank? &&  params[:code].blank?
+        raise "Hey Buddy, Please enter Resource URL or Code Snippet."
+      end
       check_resource_url params[:absolute_url]
       Snippet.create!(:technology_id => params[:technology_id],
                       :absolute_url => params[:absolute_url],
                       :description => params[:description],
                       :heading => params[:heading],
                       :security => params[:security],
-                      :user_id => current_user.id)
+                      :user_id => current_user.id,
+                      :code => params[:code])
       redirect_to snippets_path
     rescue Exception => e
       flash[:error] = e.message

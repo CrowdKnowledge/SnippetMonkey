@@ -1,0 +1,12 @@
+<%next_state = @snippets.last_page? ? "next disabled" : "next"%>
+<%next_state_href = @snippets.last_page? ? "#" : snippets_path(:page => @snippets.current_page + 1)%>
+<%prev_state = @snippets.first_page? ? "previous disabled" : "previous"%>
+<%prev_state_href = @snippets.first_page? ? "#" : snippets_path(:page => @snippets.current_page - 1)%>
+<ul class="pager">
+    <li class="<%= next_state%>">
+    	<a href=<%= next_state_href%>>Older &rarr;</a>
+    </li>
+    <li class="<%= prev_state%>">
+    	<a href=<%= prev_state_href%>>&larr; Newer</a>
+    </li>
+</ul>

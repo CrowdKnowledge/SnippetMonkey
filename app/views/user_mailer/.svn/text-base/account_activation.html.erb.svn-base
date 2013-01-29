@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+</head>
+    <body style="font-family:Arial, Helvetica, sans-serif">
+		<div class="logo">
+        	<h1><img src="<%= @application_root_url%>/assets/logo_small.png" class="btm_logo"></h1>
+      		<h3  style="color: #336699">Hi, <%= @user.username%>. Welcome to Brocker Soft!</h3>
+      	</div>
+        <div>
+        	<p>Please <%= link_to "Click here", @account_activation_link%> to activate your account</p>
+        </div><br />
+	  <div id="footer_block">
+	  		<img src="<%= @application_root_url%>/assets/footer_logo.png" class="btm_logo"><br />
+	  		<img src="<%= @application_root_url%>/assets/footer_p.png" class="btm_logo">
+		    <p>© 2012 BBCS Tech Solutions LLC …</p>
+	  </div> 
+    </body>
+</html>

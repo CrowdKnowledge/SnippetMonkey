@@ -1,0 +1,36 @@
+<div class="nav-collapse">
+<ul class="nav" style="padding-top: 24px;">
+<!-- <li class="active"><a href="/snippets"><i class="icon-th-list"></i> Snipps</a></li> -->
+	<li class=""><a href="/snippets"><i class="icon-home"></i> Monkey Space</a></li>
+	<ul class="nav">
+	  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i> My Resources <b class="caret"></b></a>
+		  <ul class="dropdown-menu">
+		    <li class=""><a href="/snippets?security=public"><i class="icon-share"></i> My Public</a></li>
+		    <li class=""><a href="/snippets?security=private"><i class="icon-lock"></i> My Private</a></li>
+		    <li class=""><a href="/snippets?security=global"><i class="icon-globe"></i> Global</a></li>
+		  </ul>
+	  </li>
+	  <li class=""><a href="/snippets/new"><i class="icon-plus-sign"></i> Create</a></li>
+	  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> User Account<b class="caret"></b></a>
+		  <ul class="dropdown-menu">
+		    <li class=""><a href="/snippets?security=public"><i class="icon-th"></i> Settings</a></li>
+		    <li class=""><a href="/users/sign_out"><i class="icon-off"></i> Logout</a></li>
+		  </ul>
+	  </li>
+	  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-filter"></i> Filter <b class="caret"></b></a>
+		  <ul class="dropdown-menu">
+		    <li class=""><a href="/snippets?security=public"><i class="icon-tag"></i> By Technology</a></li>
+		    <li class=""><a href="/snippets?security=private"><i class="icon-comment"></i> Top Commented</a></li>
+		    <li class=""><a href="/snippets"><i class="icon-share"></i> Top Shared</a></li>
+		  </ul>
+	  </li>
+	  <li class=""><a href="/snippets/about"><i class="icon-info-sign"></i>  About</a></li>
+	</ul>
+</ul>
+<form class="navbar-form form-search pull-right" method="POST" action="/snippets/search" accept-charset="UTF-8">
+  <div class="input-append" style="padding-top: 27px;">
+    <input type="text" name="q" class="span2 search-query" placeholder="Search Keyword">
+    <button type="submit" class="btn-primary btn"><i class="icon-search"></i></button>
+  </div>
+</form>
+  </div><!--/.nav-collapse -->

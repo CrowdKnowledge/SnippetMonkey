@@ -59,7 +59,7 @@
 							<div class="span3">
 								<p class="lead"> <h4>Resource :	</h4></p>
 								<p>
-								<a href=<%= snippet.absolute_url%>><span class="label label-info">Navigate To Resource</span></a>
+								<a href=<%= snippet.absolute_url%>><span class="label label-info">GoTo Resource URL</span></a>
 								</p>
 								<p class="muted">
 									Resource created on:
@@ -75,6 +75,9 @@
 								<p class="lead"> <h4>Description :	</h4></p>
 								<p><%= truncate(snippet.description, :length => 50, :omission => '...(more)')%></p>
 								<p><a href=<%= snippet_path(snippet)%>><span class="label label-error">Read Description</span></a>
+								<%if snippet.code%>	
+									<p>&nbsp;&nbsp;&nbsp;<a data-toggle="modal" href="#snippet_view" ><span class="label label-sucess"> View  Snippet </span></a></p>
+								<%end%>
 							</div>
 							<div class="span3">
 								<p class="lead"> <h4>Technology :	</h4></p>
@@ -82,8 +85,10 @@
 							</div><br /><br />
 							<div class="span9">
 								<p><strong>Actions : </strong>
-								    	<a href=<%= edit_snippet_path(snippet)%>><i class="icon-edit"></i><span class="label label-info"></span> </a> 
-								    	<a href=<%= delete_resource_snippet_path(snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
+										<%if snippet.user_id == current_user.id%>
+								    		<a href=<%= edit_snippet_path(snippet)%>><i class="icon-edit"></i><span class="label label-info"></span> </a> 
+								    		<a href=<%= delete_resource_snippet_path(snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
+								    	<%end%>
 								    	<a id="comment_icon" data-toggle="modal" href="#comment_modal"><i class="icon-comment"></i><span class="label label-info"></span> </a>
 								    	| <i class="icon-user"></i> <a href="#"><%= snippet.user.first_name%></a> 
 								    	| <i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%>
@@ -113,7 +118,59 @@
 							</div>
 						</div>
 			      </tr>
-					<%= social_share_button_tag(snippet.heading, :rel => "twipsy", :url => snippet_url(snippet)) %></p>
+				<!-- AddThis Button BEGIN -->
+				<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+					<a  addthis:title="<%= snippet.heading%>"
+						addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+						addthis:description="<%= snippet.description%>"
+						class="addthis_button_preferred_1">
+					</a>
+					<a addthis:title="<%= snippet.heading%>" 
+					   addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+					   addthis:description="<%= snippet.description%>"
+					   class="addthis_button_preferred_2">
+					</a>
+					<a addthis:title="<%= snippet.heading%>" 
+					   addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+					   addthis:description="<%= snippet.description%>"
+					   class="addthis_button_preferred_3">
+					</a>
+					<a  addthis:title="<%= snippet.heading%>" 
+						addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+						addthis:description="<%= snippet.description%>"
+						class="addthis_button_preferred_4">
+					</a>
+					<a addthis:title="<%= snippet.heading%>"
+					   addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+					   addthis:description="<%= snippet.description%>"
+					   class="addthis_button_compact">
+					</a>
+					<a addthis:title="<%= snippet.heading%>"
+					   addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+					   addthis:description="<%= snippet.description%>"
+					   class="addthis_counter addthis_bubble_style">
+					</a>
+				</div>
+				<!-- AddThis Button END -->
+	<%if snippet.code%>		
+		<div id="snippet_view" class="modal hide fade">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">×</button>
+				<h3>Snippet Code</h3>
+			</div>
+			<div class="modal-body">
+				<pre class="prettyprint linenums:1">
+					<ol class="linenums">
+						<%snippet.code.split("\n").each_with_index do |line, index| %>
+							<li class=<%= "L#{index}"%>><p><%= line%></p></li>
+						<%end%>
+					</ol>
+					<%= snippet.code%>
+				</pre>
+			</div>
+		</div>
+	<%end%>
+					<!-- <%= social_share_button_tag(snippet.heading, :rel => "twipsy", :url => snippet_url(snippet)) %></p> -->
 			      <div class="span9"> <hr/></div>
 	    <% end %>
 	  </tbody>
@@ -145,3 +202,7 @@ $(document).ready(function(){
 	})(jQuery);
 
 </script>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51078afc42a872c8"></script>
+
+

@@ -77,8 +77,17 @@
 		<div class="controls">
 			<textarea placeholder="Enter resource description" rows="2" class="span8" name="description" id="description" cols="50" value="<%= @snippet.description%>"></textarea>
 		</div>
+	</div>
+	<div class="control-group">
+		<label for="description" class="control-label">Snippet for the Resource </label>
+		<div class="controls">
+			<pre class="prettyprint linenums" id="copybody">
+				<textarea placeholder="Enter resource description" rows="2" class="span8" name="code" id="code" name="code" cols="50"></textarea>
+			</pre>
+		</div>
 		<div class="form-actions"><button class="btn-primary btn" type="submit">Save Snipp</button> <a href="/snippets" class="btn">Cancel</a></div>
 	</div>
+	
 </form>
 <script type="text/javascript">
 	jQuery(function($) {
@@ -90,3 +99,14 @@
 	  });
 	});	
 </script>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#code').each(function() {
+	         var editor = CodeMirror.fromTextArea(this, {
+	             lineNumbers : true,
+	             matchBrackets : true
+	         });
+	     })
+	})
+</script>
+

@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require social-share-button
+//= require codemirror
 //= require_tree .
 

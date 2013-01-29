@@ -1,0 +1,69 @@
+class Users::RegistrationsController < ApplicationController
+   #before_filter :verify_api_authentication, :only => [:remote_sign_up]
+
+=begin
+  This function is used to create users from the sunscription app. 
+=end 
+  def remote_sign_up
+      begin
+        email, password, username = params[:email], params[:password], params[:name]
+         if email.blank? || password.blank? || username.blank?
+          render :status=>200,
+                 :json=>{:Message=>"The request must contain the user name, email, password",
+                         :Response => "Fail",
+                         :AuthToken => nil}
+          return
+        end
+        if User.find_by_email(email)
+          render :status=>200,
+                 :json=>{:Message=>"User already exists.",
+                         :Response => "Fail",
+                         :AuthToken => nil}
+          return          
+        end
+         @user = User.new(:email => email,
+                          :password => password,
+                          :username => username,
+                          :confirmation_token => set_confirmation_token,
+                          :confirmation_sent_at => Time.now,
+                          :confirmation_status => false)
+        if @user.save!
+          @user.ensure_authentication_token!
+          UserMailer.send_activation_mail(@user,
+                                          user_account_activation_path(@user.confirmation_token),
+                                          ROOT_URL)
+          render :status=>200,
+                 :json=>{:Message=>"Hi, #{@user.username}. Welcome to Brocker Soft! \n\nPlease check your email for activation. You must activate your account before signing in.",
+                         :Response => "Success",
+                         :AuthToken => @user.authentication_token,
+                         :ConfirmationStatus => @user.confirmation_status
+                         }
+        else
+          render :status=>200,
+                 :json=>{:Message=>"Failed to create user",
+                         :Response => "Fail",
+                         :AuthToken => nil}
+        end
+        rescue Exception => e
+          render :status=>200,
+                 :json=>{:Message=>e.message,
+                         :Response => "Fail",
+                         :AuthToken => nil}
+        end
+  end
+  
+=begin
+  This function is used to activate the account 
+=end
+  def activate_account
+    user = User.find_by_confirmation_token(params[:confirmation_token])
+    if user && (Time.diff(Time.now, user.confirmation_sent_at)[:day] <= 2)
+      user.update_attributes!(:confirmed_at => Time.now,
+                              :confirmation_status => true)
+      flash[:notice] = 'Your account has been activated successfully.Please signin to continue.'
+    else
+      flash[:alert] = 'Url expired'
+    end
+  end
+  
+end

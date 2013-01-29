@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+</head>
+    <body>
+    	
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a id="logo" class="brand" href="#"><%= image_tag "monkey_logo.png", :width => "70", :height => "70"%>Snippet Monkey</a>
+      </div>
+    </div>
+  </div>
+  
+        <div>
+        	<p>Please <%= link_to "Click here", @account_activation_link%> to activate your account</p>
+        </div><br />
+		<div id="footer">
+			<div class="footer">
+		        <p>Copyright &copy; 2013 Snippet Monkey. All rights reserved</p>
+		    </div>
+		</div>
+    </body>
+</html>

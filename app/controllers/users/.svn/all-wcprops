@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/brokersoft/!svn/ver/828/trunk/BBC/app/controllers/users
+END
+registrations_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/brokersoft/!svn/ver/828/trunk/BBC/app/controllers/users/registrations_controller.rb
+END
+sessions_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/brokersoft/!svn/ver/657/trunk/BBC/app/controllers/users/sessions_controller.rb
+END

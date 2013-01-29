@@ -1,27 +1,117 @@
-<%- model_class = Snippet -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
-</div>
+				 		<div class="row">
+				 			<p class="text-info">
+				 				<h1><%= @snippet.heading.capitalize%><h1>
+								<h1><%= image_tag "face-monkey.png"%>
+									
+							        <%if @snippet.security == "public"%>
+							        	<span class="label label-success"><%= @snippet.security%></span>
+							       	<%else%>
+							       		<span class="label label-important"><%= @snippet.security%></span>
+							       	<%end%>
+								</h1>
+							</p>
+							<div class="span3">
+								<p class="lead"> <h4>Resource :	</h4></p>
+								<p>
+								<a href=<%= @snippet.absolute_url%>><span class="label label-info">GoTo Resource URL</span></a>
+								</p>
+								<p class="muted">
+									Resource created on:
+								</p>
+								<p><i class="icon-calendar"></i> <%= @snippet.created_at.strftime("%B %d, %Y %T")%></p>
+								<p class="muted">
+									Authored By:
+								</p>
+								<p><i class="icon-envelope"></i> <%= @snippet.user.email%></p>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:heading) %>:</strong></dt>
-  <dd><%= @snippet.heading %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:absolute_url) %>:</strong></dt>
-  <dd><%= @snippet.absolute_url %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-  <dd><%= @snippet.description %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:image_url) %>:</strong></dt>
-  <dd><%= @snippet.image_url %></dd>
-</dl>
+							</div>
+							<div class="span3">
+								<p class="lead"> <h4>Description :	</h4></p>
+								<p><%= @snippet.description%></p>
+							</div>
+							<div class="span3">
+								<p class="lead"> <h4>Technology :	</h4></p>
+								<p><%= image_tag @snippet.technology.icon_path, :width => "80", :height => "80"%></p>						
+							</div><br /><br />
+							<div class="span9">
+								<p><strong>Actions : </strong>
+										<%if @snippet.user_id == current_user.id%>
+								    		<a href=<%= edit_snippet_path(@snippet)%>><i class="icon-edit"></i><span class="label label-info"></span> </a> 
+								    		<a href=<%= delete_resource_snippet_path(@snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
+								    	<%end%>
+								    	<a id="comment_icon" data-toggle="modal" href="#comment_modal"><i class="icon-comment"></i><span class="label label-info"></span> </a>
+								    	| <i class="icon-user"></i> <a href="#"><%= @snippet.user.first_name%></a> 
+								    	| <i class="icon-calendar"></i> <%= @snippet.created_at.strftime("%B %d, %Y %T")%>
+								     	| <i class="icon-comment"></i> <a href="#"><%= @snippet.comments.size%> Comments</a>
+								       	| <i class="icon-share"></i> <a href="#">39 Shares</a>
+								</p>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              snippets_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_snippet_path(@snippet), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              snippet_path(@snippet),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+								<div id="comment_modal" class="modal hide fade">
+									<div class="modal-header">
+									<button class="close" data-dismiss="modal">×</button>
+									<h3>Type a Comment</h3>
+									</div>
+									<div class="modal-body">
+									    <div class="span4 well">
+									    <form accept-charset="UTF-8" action="<%= add_snippet_comment_snippet_path(@snippet)%>" method="POST">
+									    <textarea class="span4" id="new_message" name="message"
+									    placeholder="Type in your comment" rows="5"></textarea>
+									    <h6 class="pull-right">Remaining<div id="chars">320</div></h6>
+									    <button class="btn btn-info" type="submit">Post Comment</button>
+									    </form>
+									    </div>
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+				<!-- AddThis Button BEGIN -->
+				<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+					<a  addthis:title="<%= @snippet.heading%>"
+						addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+						addthis:description="<%= @snippet.description%>"
+						class="addthis_button_preferred_1">
+					</a>
+					<a addthis:title="<%= @snippet.heading%>" 
+					   addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+					   addthis:description="<%= @snippet.description%>"
+					   class="addthis_button_preferred_2">
+					</a>
+					<a addthis:title="<%= @snippet.heading%>" 
+					   addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+					   addthis:description="<%= @snippet.description%>"
+					   class="addthis_button_preferred_3">
+					</a>
+					<a  addthis:title="<%= @snippet.heading%>" 
+						addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+						addthis:description="<%= @snippet.description%>"
+						class="addthis_button_preferred_4">
+					</a>
+					<a addthis:title="<%= @snippet.heading%>"
+					   addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+					   addthis:description="<%= @snippet.description%>"
+					   class="addthis_button_compact">
+					</a>
+					<a addthis:title="<%= @snippet.heading%>"
+					   addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+					   addthis:description="<%= @snippet.description%>"
+					   class="addthis_counter addthis_bubble_style">
+					</a>
+				</div>
+				<!-- AddThis Button END -->
+				<p>
+					<%if @snippet.code%>		
+								<pre class="prettyprint linenums:1">
+									<ol class="linenums">
+										<%@snippet.code.split("\n").each_with_index do |line, index| %>
+											<li class=<%= "L#{index}"%>><p><%= line%></p></li>
+										<%end%>
+									</ol>
+									<%= @snippet.code%>
+								</pre>
+					<%end%>
+				</p>
+			      <div class="span9"> <hr/></div>
+
