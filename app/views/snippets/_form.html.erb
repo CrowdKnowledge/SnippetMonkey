@@ -36,9 +36,8 @@
 	  <strong>Yeah! </strong>You can <%= message%> your snippets here.<br />
 	  Play with monkey. Save your resources. Njoy :) 
 	 </div>
-
-
-<form class="form-vertical" method="POST" action="/snippets" accept-charset="UTF-8">
+<% form_action = (params[:action] == 'new') ? "/snippets" : "/snippets/#{params[:id]}/update_snippet"%>
+	<form class="form-vertical" method="post" action=<%= form_action%> accept-charset="UTF-8">
 	<legend>Submit Resource</legend>
 	<div class="control-group">
 		<label for="heading" class="control-label">Resource Heading *</label>
@@ -82,7 +81,7 @@
 		<label for="description" class="control-label">Snippet for the Resource </label>
 		<div class="controls">
 			<pre class="prettyprint linenums" id="copybody">
-				<textarea placeholder="Enter resource description" rows="2" class="span8" name="code" id="code" name="code" cols="50"></textarea>
+				<%= @snippet.code%>
 			</pre>
 		</div>
 		<div class="form-actions"><button class="btn-primary btn" type="submit">Save Snipp</button> <a href="/snippets" class="btn">Cancel</a></div>

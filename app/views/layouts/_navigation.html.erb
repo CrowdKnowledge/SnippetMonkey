@@ -1,35 +1,37 @@
 <div class="nav-collapse">
 <ul class="nav" style="padding-top: 24px;">
 <!-- <li class="active"><a href="/snippets"><i class="icon-th-list"></i> Snipps</a></li> -->
-	<li class=""><a href="/snippets"><i class="icon-home"></i> Monkey Space</a></li>
+	<li class=""><a href="/snippets?mode=space"><i class="icon-home"></i> Monkey Space</a></li>
 	<ul class="nav">
 	  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i> My Resources <b class="caret"></b></a>
 		  <ul class="dropdown-menu">
-		    <li class=""><a href="/snippets?security=public"><i class="icon-share"></i> My Public</a></li>
-		    <li class=""><a href="/snippets?security=private"><i class="icon-lock"></i> My Private</a></li>
-		    <li class=""><a href="/snippets?security=global"><i class="icon-globe"></i> Global</a></li>
+		    <li class=""><a href="/snippets?mode=public"><i class="icon-share"></i> My Public</a></li>
+		    <li class=""><a href="/snippets?mode=private"><i class="icon-lock"></i> My Private</a></li>
+		    <li class=""><a href="/snippets?mode=global"><i class="icon-globe"></i> Global</a></li>
 		  </ul>
 	  </li>
 	  <li class=""><a href="/snippets/new"><i class="icon-plus-sign"></i> Create</a></li>
 	  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> User Account<b class="caret"></b></a>
 		  <ul class="dropdown-menu">
-		    <li class=""><a href="/snippets?security=public"><i class="icon-th"></i> Settings</a></li>
+		    <li class=""><a href="<%= users_profile_path%>"><i class="icon-th"></i> Settings</a></li>
 		    <li class=""><a href="/users/sign_out"><i class="icon-off"></i> Logout</a></li>
 		  </ul>
 	  </li>
-	  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-filter"></i> Filter <b class="caret"></b></a>
-		  <ul class="dropdown-menu">
-		    <li class=""><a href="/snippets?security=public"><i class="icon-tag"></i> By Technology</a></li>
-		    <li class=""><a href="/snippets?security=private"><i class="icon-comment"></i> Top Commented</a></li>
-		    <li class=""><a href="/snippets"><i class="icon-share"></i> Top Shared</a></li>
-		  </ul>
-	  </li>
-	  <li class=""><a href="/snippets/about"><i class="icon-info-sign"></i>  About</a></li>
+
+
+
+<li class=""><a data-toggle="modal" href="#filter_modal"><i class="icon-filter"></i>  Filter</a></li>
+
+ 
+	  <li class=""><a href="<%= about_us_path%>"><i class="icon-info-sign"></i>  About</a></li>
+	  
+	  <li class="pull-right" style="padding-left: 60px;margin-top: -5px;"><a href="<%= users_profile_path%>"><%= image_tag current_user.avatar_url, :height  => "30", :width => "30"%>&nbsp;&nbsp;<%= truncate(current_user.full_name, :length => 15, :omission => '...')%></a></li>
 	</ul>
 </ul>
-<form class="navbar-form form-search pull-right" method="POST" action="/snippets/search" accept-charset="UTF-8">
+
+<form class="navbar-form form-search pull-right" method="POST" action="/search" accept-charset="UTF-8">
   <div class="input-append" style="padding-top: 27px;">
-    <input type="text" name="q" class="span2 search-query" placeholder="Search Keyword">
+    <input type="text" name="query_string" class="span2 search-query" placeholder="Search Keyword">
     <button type="submit" class="btn-primary btn"><i class="icon-search"></i></button>
   </div>
 </form>

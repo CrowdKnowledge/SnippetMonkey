@@ -1,0 +1,117 @@
+<div class="row">
+	<div class="span9">
+		<p><h3>User Profile</h></p>
+
+<div class="well">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#full_profile" data-toggle="tab">Full Profile</a></li>
+      <li><a href="#home" data-toggle="tab">Edit Info</a></li>
+      <li><a href="#profile" data-toggle="tab">Edit Password</a></li>
+      <li><a href="#image" data-toggle="tab">Change Image</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade" id="home">
+        <form name="profile_form" id="tab" method="post" action="/users/change_profile_info">
+            <label>First Name</label>
+            <input name="first_name" type="text" value="<%= current_user.first_name%>" class="input-xlarge" placeholder="First Name">
+            <label>Last Name</label>
+            <input name="last_name" type="text" value="<%= current_user.last_name rescue nil%>" class="input-xlarge" placeholder="Last Name">
+            <label>Email</label>
+            <input name="email" type="text" value="<%= current_user.email%>" class="input-xlarge" disabled="true" placeholder="Email">
+            <label>Address</label>
+            <textarea name="address" value="" rows="3" class="input-xlarge">
+            	<%= current_user.address rescue nil%>
+            </textarea>
+          	<div>
+        	    <button class="btn btn-primary">Update</button>
+        	</div>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="profile">
+    	<form name="password_form" id="tab2" method="post" action="/users/change_password">
+        	<label>New Password</label>
+        	<input name="password" type="password" class="input-xlarge">
+        	<div>
+        	    <button class="btn btn-primary">Update</button>
+        	</div>
+    	</form>
+      </div>
+      <div id="image" class="tab-pane fade">
+  	    	<p><a data-toggle="modal" href="#upload_modal">
+  	    		<%if current_user.avatar?%>
+  	    		  <div class="span2">
+  	    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+					</div>
+  	    		<%else%>
+  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image"%>
+  	    		<%end%>
+  	    		</a></p>
+  	    		<a data-toggle="modal" href="#upload_modal">
+					<p><button type="button" class="btn btn-medium btn-info">Click To Change Image!</button></p>
+				</a>
+				<div id="upload_modal" class="modal hide fade">
+					<div class="modal-header">
+					<button class="close" data-dismiss="modal">×</button>
+					<h3>Upload User Image</h3>
+					</div>
+					<div class="modal-body">
+						<form name="file"  method="post" action="/users/upload_avatar" class="form-horizontal" enctype="multipart/form-data">
+							<p class="help-block">Select Image</p>
+							<div class="input-prepend">
+								<div class="help-block">
+							<p>
+								<input class="prependedInput" size="16" type="file" name="user_image">
+								<br /><button type="submit" class="btn btn-medium btn-info">Upload</button>
+							</p>
+							</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+      </div>
+      
+            <div class="tab-pane active in" id="full_profile">
+				<table class="table table-striped">
+				  <thead>
+				    <tr>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <!-- <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<tr>
+				  		<td>
+			    		  <div class="span2">
+			    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+							</div>	  			
+				  		</td>
+				  		<td>
+				  			<div class="span3">
+				  				<div class="input-prepend">
+				  				<p><i class="icon-user"></i> <h2><%= current_user.full_name%></h2></p>
+				  				</div>
+				  				<p><h5><%= current_user.email%></h5></p>
+				  				<p><%= current_user.address%></p>
+				  			</div>
+				  		</td>
+				  	</tr>
+					</tbody>
+				</table>
+      		</div>
+      
+  </div>
+  	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		console.log($("#coder_monkey"));
+		$("#coder_monkey").css("padding-left", "690px");
+		$("#coder_monkey").css("margin-top", "-380px");
+	})
+</script>

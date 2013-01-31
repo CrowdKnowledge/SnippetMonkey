@@ -5,11 +5,21 @@ SniptMonkey::Application.routes.draw do
       get 'delete_resource'
       get 'share_resource'
       post 'add_snippet_comment'
+      post 'update_snippet'
+      get 'show_comments'
     end
   end
-  
-  devise_for :users, :controllers => { :sessions => "users/sessions" , :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks"}
+  match '/search', :to => "snippets#search", :via => :post
+  match '/filter', :to => "snippets#filter", :via => [:post, :get]
+  match '/about_us', :to => "snippets#about_us", :via => :get
+  match '/privacy_policy', :to => "snippets#privacy_policy", :via => :get
+  match '/license', :to => "snippets#license", :via => :get
+  devise_for :users, :controllers => { :sessions => "users/sessions" , :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks", :activities => "users/activities"}
  devise_scope :user do
+   post '/users/upload_avatar' => 'users/activities#upload_avatar'
+   post '/users/change_profile_info' => 'users/activities#change_profile_info'
+   post '/users/change_password' => 'users/activities#change_password'
+   get '/users/profile' => 'users/activities#view_profile'
    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
    get "users/sign_out", :to => "users/sessions#destroy"
    match "/user/sign_up", :to => "users/registrations#sign_up", :via => :post
@@ -23,7 +33,7 @@ SniptMonkey::Application.routes.draw do
  end
  
  root :to => 'snippets#index'
-  
+ 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

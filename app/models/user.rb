@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
   validates :first_name, :presence => true
   has_many :comments
   has_many :snippets
+  mount_uploader :avatar, AvatarUploader
   # attr_accessible :title, :body
   
 # def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -84,6 +85,6 @@ end
   end
   
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name}".gsub(/^\s*\w/) {|match| match.upcase }
   end
 end

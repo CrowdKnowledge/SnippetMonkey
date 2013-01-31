@@ -42,7 +42,7 @@
 								    	<a id="comment_icon" data-toggle="modal" href="#comment_modal"><i class="icon-comment"></i><span class="label label-info"></span> </a>
 								    	| <i class="icon-user"></i> <a href="#"><%= @snippet.user.first_name%></a> 
 								    	| <i class="icon-calendar"></i> <%= @snippet.created_at.strftime("%B %d, %Y %T")%>
-								     	| <i class="icon-comment"></i> <a href="#"><%= @snippet.comments.size%> Comments</a>
+								     	| <i class="icon-comment"></i> <a href="<%= show_comments_snippet_path(@snippet)%>"><%= @snippet.comments.size%> Comments</a>
 								       	| <i class="icon-share"></i> <a href="#">39 Shares</a>
 								</p>
 

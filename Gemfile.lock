@@ -31,6 +31,9 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
+    carrierwave (0.6.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
     codemirror-rails (3.00)
       railties (~> 3.0)
     coffee-rails (3.2.2)
@@ -51,8 +54,10 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    fattr (2.2.1)
     grabzit (1.1.0)
     hashie (1.2.0)
+    highline (1.6.15)
     hike (1.2.1)
     httpauth (0.2.0)
     i18n (0.6.1)
@@ -94,8 +99,13 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    options (2.3.0)
+      fattr
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    progress_bar (0.4.0)
+      highline (~> 1.6.1)
+      options (~> 2.3.0)
     rack (1.4.4)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -121,6 +131,7 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
+    rmagick (2.13.1)
     sass (3.2.5)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -158,6 +169,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  carrierwave
   codemirror-rails
   coffee-rails (~> 3.2.1)
   devise
@@ -169,7 +181,9 @@ DEPENDENCIES
   mysql2
   omniauth
   omniauth-facebook
+  progress_bar
   rails (= 3.2.11)
+  rmagick (~> 2.13.1)
   sass-rails (~> 3.2.3)
   social-share-button
   sqlite3

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130129105611) do
+ActiveRecord::Schema.define(:version => 20130131102600) do
 
   create_table "add_code_to_snippets", :force => true do |t|
     t.text     "code"
@@ -33,12 +33,13 @@ ActiveRecord::Schema.define(:version => 20130129105611) do
     t.string   "absolute_url"
     t.text     "description"
     t.string   "image_url"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "security"
     t.integer  "technology_id"
     t.integer  "user_id"
     t.string   "code"
+    t.integer  "comments_count", :default => 0
   end
 
   create_table "technologies", :force => true do |t|
@@ -78,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20130129105611) do
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
+    t.string   "avatar"
+    t.text     "address"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

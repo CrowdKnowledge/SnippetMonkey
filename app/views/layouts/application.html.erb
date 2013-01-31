@@ -30,25 +30,58 @@
   </div>
 <br />
   <div class="container" style="padding-top: 130px">
+  	<%unless current_user.blank?%>
   	    <div class="row2">
-  	    	<p><%= image_tag "user.jpg", :width => "120", :height => "120"%></p>
-  	    	<p><h4><%= truncate(current_user.full_name, :length => 13)%></h4></p>
+  	    	<p><a data-toggle="modal" href="#upload_modal">
+  	    		<%if current_user.avatar?%>
+  	    		  <div class="span2">
+  	    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+					</div>
+  	    		<%else%>
+  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image"%>
+  	    		<%end%>
+  	    		</a></p>
+    	
+	<div id="upload_modal" class="modal hide fade">
+		<div class="modal-header">
+		<button class="close" data-dismiss="modal">×</button>
+		<h3>Upload User Image</h3>
+		</div>
+		<div class="modal-body">
+			<form name="file"  method="post" action="/users/upload_avatar" class="form-horizontal" enctype="multipart/form-data">
+				<p class="help-block">Select Image</p>
+				<div class="input-prepend">
+					<div class="help-block">
+				<p>
+					<input class="prependedInput" size="16" type="file" name="user_image">
+					<br /><button type="submit" class="btn btn-medium btn-info">Upload</button>
+				</p>
+				</div>
+				</div>
+			</form>
+		</div>
+	</div>
+   
+
     	</div>
+    <%end%>
     <div class="row">
       <div class="span9">
     <%flash.map do |key,value|%>
 	    <%if user_signed_in?%>
-			<div class="alert alert-<%= key%>">
-			  <button type="button" class="close" data-dismiss="alert">×</button>
-			  <%case key%>
-			  	<%when "info"%>
-			  		<%flash_string_text = "Hey Buddy,"%>
-			  	<%when "error"%>
-			  		<%flash_string_text = "Oops! Some thing wrong :("%>
-			  <%end%>
-			  <strong><%= flash_string_text%></strong>
-			  <%= value%>
-			</div>
+	    	<%unless value.blank?%>
+				<div class="alert alert-<%= key%>">
+				  <button type="button" class="close" data-dismiss="alert">×</button>
+				  <%case key%>
+				  	<%when "info"%>
+				  		<%flash_string_text = "Hey Buddy,"%>
+				  	<%when "error"%>
+				  		<%flash_string_text = "Oops! Some thing wrong :("%>
+				  <%end%>
+				  <strong><%= flash_string_text%></strong>
+				  <%= value%>
+				</div>
+			<%end%>
 		<%else%>
 			<div id="alert_info" class="alert alert-info">
 				<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
@@ -68,7 +101,7 @@
       	</div>
       
       	<%if user_signed_in?%>
-      		<div class="span3">
+      		<div id="coder_monkey" class="span3">
       			<%= image_tag "CodeMonkeySketch.jpg"%>
       		</div>
       	<%else%>
@@ -83,9 +116,87 @@
     </div>
   </div>
  
-
+ 
+    <!-- Advanced Modal -->
+    <div id="filter_modal" style="display: block; width: 700px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="advancedSort" aria-hidden="true">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <ul class="nav nav-pills pull-right">
+    <li class="active">
+    <a href="#technology" data-toggle="pill">Technology</a>
+    </li>
+    <li><a href="#comment" data-toggle="pill">Top Comments</a></li>
+    <!-- <li><a href="#dealership" data-toggle="pill">Dealership</a></li> -->
+    </ul>
+    <h4>Advanced Filter</h4>
+    </div>
+    <div class="modal-body" style="width: 700px;">
+    <div class="row-fluid">
+    <div class="tab-content">
+    <div class="tab-pane active" id="technology">
+	    <form method="POST" action="/filter" accept-charset="UTF-8">
+	    <div class="controls controls-row">
+	    	<%= hidden_field_tag "mode", "technology"%>
+		    <select name="technology_id">
+				  <%Technology.all.each do |technology|%>
+				  	<%= technology.id%>
+				  	<option value="<%= technology.id%>"><%= technology.name%></option>
+				  <%end%> 
+			</select>
+		    <select name="resource_type">
+		    	<option value="global">Global Resources</option>
+		    	<option value="mine">My Resources</option>
+			</select>
+		    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
+	     </div>
+	    </form>
+    </div>
+    <div class="tab-pane" id="comment">
+	    <form method="POST" action="/filter" accept-charset="UTF-8">
+	    <div class="controls controls-row">
+	    	<%= hidden_field_tag "mode", "comment"%>
+		    <select name="resource_type">
+		    	<option value="global">Global Resources</option>
+		    	<option value="mine">My Resources</option>
+			</select>
+		    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
+	     </div>
+	    </form>
+    </div>
+    <div class="tab-pane" id="dealership">
+    <form>
+    <fieldset>
+    <div class="controls controls-row">
+    <input type="text" class="span8" placeholder="Location">
+    <select class="span4">
+    <option>City</option>
+    <option>Los Angeles</option>
+    <option>Tokyo</option>
+    <option>New York</option>
+    <option>London</option>
+    </select>
+    </div>
+    <button type="submit" class="btn btn-warning">Sort</button>
+    </fieldset>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 </body>
-<div class="footer"></div>
+
+	<hr />
+
+	<footer>
+		<div class="container">
+	<p>Snippet Monkey.com was crafted by <a href="https://github.com/kannancet" target="_blank">Snippet Team</a> 2013. | <a href=<%= privacy_policy_path%> target="_blank">Site Privacy policy</a> | All snippets are <a href="<%= license_path%>">MIT license.</a> | Built with <a href="http://rubyonrails.org/" target="_blank" title="Ruby on Rails">Ruby on Rails<%= image_tag "rails.png", :width => "32", :height => "32"%></a> </footer>
+		</div
+    <!-- <footer>
+      <div class="container">
+        <p><strong><h6 style="padding-left:90px;">Copyright © 2013 - Snippet Team. All Rights Reserved</strong>  | <strong>Email</strong> : team.snippet.monkey@gmail.com </p>
+      </div>
+    </footer> -->
 </html>
 
 <script>
