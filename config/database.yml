@@ -20,29 +20,29 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: snippet_monkey_development
+  database: d9lupiet6ts0tj
   pool: 5
-  username: root
-  password: qburst
-  host: localhost
+  username: pkbmzxoxggcslq
+  password: 8UXJoE9fib9icgbP1mOS09Zs4P
+  host: ec2-54-243-218-99.compute-1.amazonaws.com
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-development:
+test:
   adapter: postgresql
   encoding: unicode
-  database: snippet_monkey_development
+  database: d9lupiet6ts0tj
   pool: 5
-  username: root
-  password: qburst
-  host: localhost
+  username: pkbmzxoxggcslq
+  password: 8UXJoE9fib9icgbP1mOS09Zs4P
+  host: ec2-54-243-218-99.compute-1.amazonaws.com
 
-development:
+production:
   adapter: postgresql
   encoding: unicode
-  database: snippet_monkey_development
+  database: d9lupiet6ts0tj
   pool: 5
-  username: root
-  password: qburst
-  host: localhost
+  username: pkbmzxoxggcslq
+  password: 8UXJoE9fib9icgbP1mOS09Zs4P
+  host: ec2-54-243-218-99.compute-1.amazonaws.com
