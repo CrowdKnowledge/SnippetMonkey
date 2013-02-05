@@ -105,10 +105,10 @@
       			<%= image_tag "CodeMonkeySketch.jpg"%>
       		</div>
       	<%else%>
-      		<div class="span9">
-      			<%= image_tag "monkey_logo.png", :width => "60%", :height => "60%"%>
+      		<div class="span9" id="wana_join">
+      			<%= image_tag "monkey_logo_new.png", :width => "90%", :height => "90%"%>
       			<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
-      				<a class="btn btn-primary" data-toggle="modal" href="#myModal" >Wana Join?</a>
+      				<a class="btn btn-primary" data-toggle="modal" href="#myModal" style="margin-left: 490px;margin-top: -382px;">Wana Join?</a>
       			<%end%>
       		</div>
       	<%end%>
@@ -192,11 +192,11 @@
 		<div class="container">
 	<p>Snippet Monkey.com was crafted by <a href="https://github.com/kannancet" target="_blank">Snippet Team</a> 2013. | <a href=<%= privacy_policy_path%> target="_blank">Site Privacy policy</a> | All snippets are <a href="<%= license_path%>">MIT license.</a> | Built with <a href="http://rubyonrails.org/" target="_blank" title="Ruby on Rails">Ruby on Rails<%= image_tag "rails.png", :width => "32", :height => "32"%></a> </footer>
 		</div
-    <!-- <footer>
+    <footer>
       <div class="container">
         <p><strong><h6 style="padding-left:90px;">Copyright © 2013 - Snippet Team. All Rights Reserved</strong>  | <strong>Email</strong> : team.snippet.monkey@gmail.com </p>
       </div>
-    </footer> -->
+    </footer>
 </html>
 
 <script>

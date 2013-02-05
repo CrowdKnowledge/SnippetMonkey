@@ -13,6 +13,8 @@ favicon.ico: favicon-2f495abe285e240ee69135956476f274.ico
 favicon/index.ico: favicon-2f495abe285e240ee69135956476f274.ico
 fb_signup.png: fb_signup-b33b9828058fcec709318865408134aa.png
 fb_signup/index.png: fb_signup-b33b9828058fcec709318865408134aa.png
+forgot_password.gif: forgot_password-060fde5ee38ef15c2569d7ba87bcb307.gif
+forgot_password/index.gif: forgot_password-060fde5ee38ef15c2569d7ba87bcb307.gif
 glyphicons-halflings-white.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 glyphicons-halflings-white/index.png: glyphicons-halflings-white-6cccd17a7aed91dbc0157d343c68c0d9.png
 glyphicons-halflings.png: glyphicons-halflings-2851b489e8c39f8fad44fc10efb99c3e.png
@@ -21,6 +23,8 @@ loading.gif: loading-2429232429c16feae5f8e31172bdf99f.gif
 loading/index.gif: loading-2429232429c16feae5f8e31172bdf99f.gif
 monkey_logo.png: monkey_logo-9e1f568165d12ca724c7cefc2d98d3c6.png
 monkey_logo/index.png: monkey_logo-9e1f568165d12ca724c7cefc2d98d3c6.png
+monkey_logo_new.png: monkey_logo_new-94fc7b31d8a24ea241cf31c02472208e.png
+monkey_logo_new/index.png: monkey_logo_new-94fc7b31d8a24ea241cf31c02472208e.png
 python.png: python-df1f7780fb5b446dfdca33a0a2197a0a.png
 python/index.png: python-df1f7780fb5b446dfdca33a0a2197a0a.png
 rails.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
@@ -37,10 +41,10 @@ user.jpg: user-ed97f52099aa430da3e6097b410c55f2.jpg
 user/index.jpg: user-ed97f52099aa430da3e6097b410c55f2.jpg
 user_up.png: user_up-ef61dbe87ea15b856afc112c7730b9b3.png
 user_up/index.png: user_up-ef61dbe87ea15b856afc112c7730b9b3.png
-application.js: application-480ec24cd4f9487d1d60cda19b040a3b.js
-application/index.js: application-480ec24cd4f9487d1d60cda19b040a3b.js
-application.css: application-5b769581e8029f00eefb88469dab6565.css
-application/index.css: application-5b769581e8029f00eefb88469dab6565.css
+application.js: application-223c8d562cb40db9fd54492b53e2b1c4.js
+application/index.js: application-223c8d562cb40db9fd54492b53e2b1c4.js
+application.css: application-2d962c1dee39e560640a2807c273c95d.css
+application/index.css: application-2d962c1dee39e560640a2807c273c95d.css
 sprites/social-share-button.png: sprites/social-share-button-b42613b64a067a3fc343bceddbe2a2d3.png
 sprites/social-share-button/index.png: sprites/social-share-button-b42613b64a067a3fc343bceddbe2a2d3.png
 sprites/social-share-button/baidu.png: sprites/social-share-button/baidu-69e2216a7fb9601f049d7c9bc01914e3.png

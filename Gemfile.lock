@@ -191,6 +191,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   less-rails
+  mail
   meta_request (= 0.2.0)
   omniauth
   omniauth-facebook

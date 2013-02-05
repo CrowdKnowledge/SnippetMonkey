@@ -27,7 +27,7 @@
 	  <li class="pull-right" style="padding-left: 60px;margin-top: -5px;">
 	  	<a href="<%= users_profile_path%>">
 	  		<%if current_user.avatar_url%>
-	  			<%= image_tag "user_up.png", :height  => "30", :width => "30" rescue nil%>
+	  			<%= image_tag current_user.avatar_url, :height  => "30", :width => "30" rescue nil%>
 	  		<%else%>
 	  			<%= image_tag "user_up.png", :height  => "30", :width => "30"%>
 	  		<%end%>

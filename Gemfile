@@ -38,6 +38,7 @@ gem 'codemirror-rails'
 gem 'carrierwave'
 gem "rmagick", "~> 2.13.1"
 gem 'progress_bar'
+gem 'mail'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
