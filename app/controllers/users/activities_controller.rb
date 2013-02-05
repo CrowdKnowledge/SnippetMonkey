@@ -53,18 +53,17 @@ class Users::ActivitiesController < ApplicationController
       @user = User.find_by_email(params[:email])
       if @user
         unless @user.confirmation_status
-          raise "Please activate your account first using the activation link sent to your email."
+          flash[:error] = "Please activate your account first using the activation link sent to your email."
         end
         UserMailer.send_password_recovery_mail(@user,
                                                edit_password_via_recovery_path(@user.confirmation_token),
                                                request.host_with_port)  
-        flash[:account_activation_success] = "We have sent the password to your email."
+        flash[:info] = "We have sent the password to your email."
       else
-        flash[:account_activation_success] = "We have sent the password to your email."
-        return
+        flash[:info] = "We have sent the password to your email."
       end
     rescue Exception => e
-      flash[:account_activation_success] = "We have sent the password to your email."
+      flash[:info] = "We have sent the password to your email."
     end
     redirect_to root_path
   end

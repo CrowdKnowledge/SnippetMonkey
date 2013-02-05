@@ -37,7 +37,7 @@ SniptMonkey::Application.routes.draw do
  end
  
  root :to => 'snippets#index'
- 
+ match '*a' => 'snippets#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
