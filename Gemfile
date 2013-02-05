@@ -25,7 +25,7 @@ end
 gem 'jquery-rails'
 gem 'therubyracer'
 gem 'pg'
-#gem 'mysql2'
+gem 'mysql2'
 gem "grabzit", "~> 1.1.0"
 gem "hashie"
 gem 'social-share-button'

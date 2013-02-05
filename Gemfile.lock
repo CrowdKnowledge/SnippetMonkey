@@ -92,6 +92,7 @@ GEM
     mime-types (1.19)
     multi_json (1.5.0)
     multipart-post (1.1.5)
+    mysql2 (0.3.11)
     oauth2 (0.8.0)
       faraday (~> 0.8)
       httpauth (~> 0.1)
@@ -193,6 +194,7 @@ DEPENDENCIES
   less-rails
   mail
   meta_request (= 0.2.0)
+  mysql2
   omniauth
   omniauth-facebook
   pg

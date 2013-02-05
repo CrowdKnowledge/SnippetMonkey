@@ -34,11 +34,12 @@ class Users::RegistrationsController < ApplicationController
     if user && (Time.diff(Time.now, user.confirmation_sent_at)[:day] <= 2)
       user.update_attributes!(:confirmed_at => Time.now,
                               :confirmation_status => true)
-      flash[:account_activation_success] = 'Your account has been activated successfully.Please signin to continue.'
+      sign_in user, :bypass => true
+      flash[:success] = 'Your account has been activated successfully.'
     else
-      flash[:account_activation_fail] = 'Hey Buddy, You are late :( The URL has expired.'
+      flash[:error] = 'Hey Buddy, You are late :( The URL has expired.'
     end
-    redirect_to new_user_session_path
+    redirect_to root_path
   end
   
 end
