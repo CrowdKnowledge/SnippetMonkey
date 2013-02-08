@@ -67,6 +67,7 @@
     <%end%>
     <div class="row">
       <div class="span9">
+      	<%count =0%>
     <%flash.map do |key,value|%>
 	    <%if user_signed_in?%>
 	    	<%unless value.blank?%>
@@ -83,10 +84,13 @@
 				</div>
 			<%end%>
 		<%else%>
+			<%unless count == 1%>
 			<div id="alert_info" class="alert alert-info">
+				<% count = 1%>
 				<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
 				<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
 			</div>
+			<%end%>
 			<div id="alert_error" class="alert alert-error">
 			</div>
 			<div id="alert_success" class="alert alert-success">
@@ -119,7 +123,7 @@
       <%if user_signed_in?%>
 	      <div class="chat">
 		    <ul class="nav nav-pills">
-		    	<li><span class="label label-success" style="margin-left: 13px">Online Users</span></li>
+		    	<li><span class="label label-success" style="margin-left: 13px">Who's Online on Snip'</span></li>
 		    	<%User.show_online_users.each do |user|%>
 		    		<li class="disabled"><a href="#"><%= image_tag "online_icon_23.jpg"%>&nbsp;&nbsp;<strong><%= user.full_name%></strong></a></li>
 		    	<%end%>
