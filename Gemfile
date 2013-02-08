@@ -40,7 +40,7 @@ gem "rmagick", "~> 2.13.1"
 gem 'progress_bar'
 gem 'mail'
 gem 'faye'
-gem 'thin'
+#gem 'thin'
 gem 'devise_lastseenable'
 gem 'jquery-ui-rails'
 gem "fog", "~> 1.3.1"

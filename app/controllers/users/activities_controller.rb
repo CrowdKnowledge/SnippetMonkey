@@ -99,4 +99,5 @@ class Users::ActivitiesController < ApplicationController
     path = "#{Rails.root}/public/user_avatars/#{params[:image]}.#{params[:format]}"
     send_file(path, :disposition => 'inline')
   end
+  
 end

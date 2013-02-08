@@ -34,8 +34,10 @@ SniptMonkey::Application.routes.draw do
    get "user/edit_password_via_recovery", :to => "users/activities#edit_password_via_recovery", :as => :edit_password_via_recovery
    post "user/update_password_via_recovery", :to => "users/activities#update_password_via_recovery"
    get "/user_avatars/:image.:format", :to => "users/activities#render_avatar_image"
+ get "/maintainance.html", :to => "users/activities#maintainance"
+ get "/page_not_found.html", :to => "users/activities#page_not_found"
  end
- 
+
  root :to => 'snippets#index'
  match '*a' => 'snippets#index'
   # The priority is based upon order of creation:
