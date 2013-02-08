@@ -114,21 +114,25 @@
       	<%end%>
       <vr class="rightline">
       </vr>
-      <div class="chat">
-    <ul class="nav nav-pills">
-    	<li><span class="label label-success" style="margin-left: 13px">Online Users To Chat</span></li>
-    	<%User.show_online_users.each do |user|%>
-    		<li class="disabled"><a href="#"><%= image_tag "online_icon_23.jpg"%>&nbsp;&nbsp;<strong><%= user.full_name%></strong></a></li>
-    	<%end%>
-    </ul>
-    <input type="button"
-    name="toggle" value="toggle" />
-    <div id="chat_div">
-    </div>
-    <hr />
-    <div id="log">
-    </div>
-	 </div>
+      
+      <!-- Chat Section -->
+      <%if user_signed_in?%>
+	      <div class="chat">
+		    <ul class="nav nav-pills">
+		    	<li><span class="label label-success" style="margin-left: 13px">Online Users To Chat</span></li>
+		    	<%User.show_online_users.each do |user|%>
+		    		<li class="disabled"><a href="#"><%= image_tag "online_icon_23.jpg"%>&nbsp;&nbsp;<strong><%= user.full_name%></strong></a></li>
+		    	<%end%>
+		    </ul>
+		    <!-- <input type="button"
+		    name="toggle" value="toggle" /> -->
+		    <div id="chat_div">
+		    </div>
+		    <hr />
+		    <div id="log">
+		    </div>
+		 </div>
+	<%end%>
       <vr class="leftline"></vr>
     </div>
  
