@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
          :token_authenticatable, :confirmable, :lockable, :timeoutable,
-         :omniauthable
+         :omniauthable, :lastseenable
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, 
                   :password, 
@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
                   :address,
                   :current_location_id,
                   :last_sign_in_ip,
-                  :provider, :uid
+                  :provider, :uid, :lastseenable
                   
   validates :first_name, :presence => true
   has_many :comments
@@ -86,5 +86,9 @@ end
   
   def full_name
     "#{first_name} #{last_name}".gsub(/^\s*\w/) {|match| match.upcase }
+  end
+  
+  def self.show_online_users
+    where("last_seen > ?", 10.minutes.ago)
   end
 end

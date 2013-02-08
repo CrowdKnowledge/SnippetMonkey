@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
   end
   
 =begin
-  This function is used to render the form for signing in a new user.
+  This function is used to render the form for signing out a new user.
 =end
   def destroy
     super

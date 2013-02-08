@@ -112,8 +112,26 @@
       			<%end%>
       		</div>
       	<%end%>
-      
+      <vr class="rightline">
+      </vr>
+      <div class="chat">
+    <ul class="nav nav-pills">
+    	<li><span class="label label-success" style="margin-left: 13px">Online Users To Chat</span></li>
+    	<%User.show_online_users.each do |user|%>
+    		<li class="disabled"><a href="#"><%= image_tag "online_icon_23.jpg"%>&nbsp;&nbsp;<strong><%= user.full_name%></strong></a></li>
+    	<%end%>
+    </ul>
+    <input type="button"
+    name="toggle" value="toggle" />
+    <div id="chat_div">
     </div>
+    <hr />
+    <div id="log">
+    </div>
+	 </div>
+      <vr class="leftline"></vr>
+    </div>
+ 
   </div>
  
  
@@ -223,3 +241,23 @@
 		$("#alert_success").hide();
 	<%end%>
 </script>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+          var box = null;
+          $("input[type='button']").click(function(event, ui) {
+              if(box) {
+                  box.chatbox("option", "boxManager").toggleBox();
+              }
+              else {
+                  box = $("#chat_div").chatbox({id:"chat_div", 
+                                                user:{key : "value"},
+                                                title : "test chat",
+                                                messageSent : function(id, user, msg) {
+                                                    $("#log").append(id + " said: " + msg + "<br/>");
+                                                    $("#chat_div").chatbox("option", "boxManager").addMsg(id, msg);
+                                                }});
+              }
+          });
+      });
+    </script>

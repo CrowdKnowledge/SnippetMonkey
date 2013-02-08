@@ -11,13 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130131102600) do
-
-  create_table "add_code_to_snippets", :force => true do |t|
-    t.text     "code"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
+ActiveRecord::Schema.define(:version => 20130206081316) do
 
   create_table "comments", :force => true do |t|
     t.text     "message"
@@ -81,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20130131102600) do
     t.datetime "oauth_expires_at"
     t.string   "avatar"
     t.text     "address"
+    t.datetime "last_seen"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
