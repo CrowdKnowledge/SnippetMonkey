@@ -43,6 +43,7 @@ gem 'faye'
 gem 'thin'
 gem 'devise_lastseenable'
 gem 'jquery-ui-rails'
+gem "fog", "~> 1.3.1"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
