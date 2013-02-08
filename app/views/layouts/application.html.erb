@@ -119,7 +119,7 @@
       <%if user_signed_in?%>
 	      <div class="chat">
 		    <ul class="nav nav-pills">
-		    	<li><span class="label label-success" style="margin-left: 13px">Online Users To Chat</span></li>
+		    	<li><span class="label label-success" style="margin-left: 13px">Online Users</span></li>
 		    	<%User.show_online_users.each do |user|%>
 		    		<li class="disabled"><a href="#"><%= image_tag "online_icon_23.jpg"%>&nbsp;&nbsp;<strong><%= user.full_name%></strong></a></li>
 		    	<%end%>
