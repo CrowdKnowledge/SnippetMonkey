@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Snippet Monkey</title>
+  <style>.forum_hover { background-color: #380606; }</style>
   <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon', :type => 'image/png' %>
 
   <!--[if lt IE 9]>
@@ -33,15 +34,16 @@
   <div class="container" style="padding-top: 130px">
   	<%unless current_user.blank?%>
   	    <div class="row2">
-  	    	<p><a data-toggle="modal" href="#upload_modal">
+  	    	<p><a data-toggle="modal" href="#upload_modal" id="avatar">
   	    		<%if current_user.avatar_url%>
   	    		  <div class="span2">
-  	    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;", :id => "avatar"%>
+  	    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
 					</div>
   	    		<%else%>
-  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image", :id => "avatar"%>
+  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image"%>
   	    		<%end%>
   	    		</a></p>
+  	    		<p><h5><strong>Click To Upload Image</strong></h5></p>
     	
 	<div id="upload_modal" class="modal hide fade">
 		<div class="modal-header">
@@ -270,6 +272,3 @@
           });
       });
     </script>
-<script type="text/javascript">
-	document.getElementById("avatar").onmouseover.style.color = "#FFFAFA'
-</script>
