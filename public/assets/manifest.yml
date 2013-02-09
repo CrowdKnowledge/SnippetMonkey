@@ -1,8 +1,32 @@
 ---
 404.jpg: 404-4e75e3c4839bd9188983f612c7aea844.jpg
 404/index.jpg: 404-4e75e3c4839bd9188983f612c7aea844.jpg
+ABC.jpeg: ABC-6eb72e66ed675dbe61a15f12b63ad633.jpeg
+ABC/index.jpeg: ABC-6eb72e66ed675dbe61a15f12b63ad633.jpeg
+AppleScript.jpeg: AppleScript-64d9c7dd167fb9a3d9448f19f707845f.jpeg
+AppleScript/index.jpeg: AppleScript-64d9c7dd167fb9a3d9448f19f707845f.jpeg
+BASIC.jpg: BASIC-3bac7a5df4878e1fcfdce9f2a1175e97.jpg
+BASIC/index.jpg: BASIC-3bac7a5df4878e1fcfdce9f2a1175e97.jpg
+C++.jpg: C++-ac7995ae41b5d173490c75f475c0ae2f.jpg
+C++/index.jpg: C++-ac7995ae41b5d173490c75f475c0ae2f.jpg
+C.jpg: C-bb9091e73aa02709248b5fdd68651fb0.jpg
+C/index.jpg: C-bb9091e73aa02709248b5fdd68651fb0.jpg
+COBOL.png: COBOL-571b9698c00dab5d0af735657528fc99.png
+COBOL/index.png: COBOL-571b9698c00dab5d0af735657528fc99.png
 CodeMonkeySketch.jpg: CodeMonkeySketch-f6e6c7fabe15b8bf2034c36eb06bd6c8.jpg
 CodeMonkeySketch/index.jpg: CodeMonkeySketch-f6e6c7fabe15b8bf2034c36eb06bd6c8.jpg
+Java.jpeg: Java-96eade0b66d51e95889126c1a072abe2.jpeg
+Java/index.jpeg: Java-96eade0b66d51e95889126c1a072abe2.jpeg
+JavaScript.jpeg: JavaScript-08cf76729eaf8c2b20453f6bdb39562e.jpeg
+JavaScript/index.jpeg: JavaScript-08cf76729eaf8c2b20453f6bdb39562e.jpeg
+Objective-C.jpeg: Objective-C-f8de53940ccb001a521a7669b4fb30be.jpeg
+Objective-C/index.jpeg: Objective-C-f8de53940ccb001a521a7669b4fb30be.jpeg
+PHP.jpeg: PHP-d71bfb3d578c631814fe499e6d3b79c7.jpeg
+PHP/index.jpeg: PHP-d71bfb3d578c631814fe499e6d3b79c7.jpeg
+Perl.jpg: Perl-316ef6725f7eeaedd99f48eb14730881.jpg
+Perl/index.jpg: Perl-316ef6725f7eeaedd99f48eb14730881.jpg
+Visual Basic.jpeg: Visual Basic-2d41265fde7413ee45d16a79468a00ee.jpeg
+Visual Basic/index.jpeg: Visual Basic-2d41265fde7413ee45d16a79468a00ee.jpeg
 django.jpg: django-f8d0c86e10420c5e86e92870b9218154.jpg
 django/index.jpg: django-f8d0c86e10420c5e86e92870b9218154.jpg
 empty_monkey.jpg: empty_monkey-85886be77a75a47194bb303259f2a1e8.jpg
