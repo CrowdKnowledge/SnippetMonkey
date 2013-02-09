@@ -47,18 +47,26 @@ class User < ActiveRecord::Base
 def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
   user = User.where(:provider => auth.provider, :uid => auth.uid).first
   unless user
-    user = User.create(  provider:auth.provider,
-                         uid:auth.uid,
-                         email:auth.info.email,
-                         first_name:auth.info.first_name,
-                         last_name:auth.info.last_name,
-                         confirmation_status: true,
-                         confirmed_at: Time.now,
-                         confirmation_sent_at: Time.now,
-                         password:Devise.friendly_token[0,20]
-                         )
-
-    user.ensure_authentication_token!
+    unless (user = User.find_by_email(auth.info.email))
+      user = User.create(  provider:auth.provider,
+                           uid:auth.uid,
+                           email:auth.info.email,
+                           first_name:auth.info.first_name,
+                           last_name:auth.info.last_name,
+                           confirmation_status: true,
+                           confirmed_at: Time.now,
+                           confirmation_sent_at: Time.now,
+                           password:Devise.friendly_token[0,20]
+                           )
+  
+      user.ensure_authentication_token!
+    else
+      user.update_attributes!(provider:auth.provider, 
+                              uid:auth.uid, 
+                              confirmation_status: true, 
+                              confirmed_at: Time.now,
+                              confirmation_sent_at: Time.now)
+    end
     #added extra to create authentication token for user
   end
   user
