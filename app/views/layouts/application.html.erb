@@ -36,10 +36,10 @@
   	    	<p><a data-toggle="modal" href="#upload_modal">
   	    		<%if current_user.avatar_url%>
   	    		  <div class="span2">
-  	    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+  	    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;", :id => "avatar"%>
 					</div>
   	    		<%else%>
-  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image"%>
+  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image", :id => "avatar"%>
   	    		<%end%>
   	    		</a></p>
     	
@@ -270,4 +270,6 @@
           });
       });
     </script>
-    
+<script type="text/javascript">
+	document.getElementById("avatar").onmouseover.style.color = "#FFFAFA'
+</script>
