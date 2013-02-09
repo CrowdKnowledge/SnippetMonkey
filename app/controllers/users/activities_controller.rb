@@ -1,5 +1,5 @@
 class Users::ActivitiesController < ApplicationController
-  #before_filter :authenticate_user!, :only => [:upload_avatar, :change_profile_info, :change_password]
+  before_filter :authenticate_user!, :only => [:upload_avatar, :change_profile_info, :change_password]
   
 =begin
   This function is used to upload user image. 
