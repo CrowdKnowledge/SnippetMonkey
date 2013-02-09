@@ -81,7 +81,11 @@
 							</div>
 							<div class="span3">
 								<p class="lead"> <h4>Technology :	</h4></p>
-								<p><%= image_tag snippet.technology.icon_path, :width => "80", :height => "80"%></p>						
+								<%if snippet.technology.icon_path%>
+									<p><%= image_tag snippet.technology.icon_path, :width => "80", :height => "80"%></p>
+								<%else%>
+									<p><%= image_tag "404.jpg" :width => "80", :height => "80"%></p>		
+								<%end%>				
 							</div><br /><br />
 							<div class="span9">
 								<p><strong>Actions : </strong>
