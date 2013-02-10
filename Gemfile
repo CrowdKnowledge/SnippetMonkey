@@ -46,7 +46,6 @@ gem 'jquery-ui-rails'
 gem "fog", "~> 1.3.1"
 gem "hpricot", "~> 0.8.6"
 gem "metamagic", "~> 2.0.5"
-gem 'rails_exception_handler', "~> 2"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
