@@ -164,14 +164,19 @@
 				<h3>Snippet Code</h3>
 			</div>
 			<div class="modal-body">
+				<div class="well">
+
 				<pre class="prettyprint linenums:1">
+					<%= snippet.code%>
+				</pre>
+				<!-- <pre class="prettyprint linenums:1">
 					<ol class="linenums">
 						<%snippet.code.split("\n").each_with_index do |line, index| %>
 							<li class=<%= "L#{index}"%>><p><%= line%></p></li>
 						<%end%>
 					</ol>
-					<%= snippet.code%>
-				</pre>
+				</pre> -->
+			</div>
 			</div>
 		</div>
 	<%end%>

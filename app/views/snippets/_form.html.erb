@@ -74,7 +74,7 @@
 	<div class="control-group">
 		<label for="description" class="control-label">Description about the Resource </label>
 		<div class="controls">
-			<textarea placeholder="Enter resource description" rows="2" class="span8" name="description" id="description" cols="50" value="<%= @snippet.description%>"></textarea>
+			<textarea placeholder="Enter resource description" rows="2" class="span8" name="description" id="description" cols="50" value="<%= @snippet.description%>"><%= @snippet.description%></textarea>
 		</div>
 	</div>
 	<div class="control-group">
@@ -82,7 +82,7 @@
 		<div class="well">
 			
 			<textarea name="code" class="prettyprint linenums" id="code">
-				<%= @snippet.code%>
+				<%= @snippet.code%> 
 			</textarea>
 		</div>
 		<div class="form-actions"><button class="btn-primary btn" type="submit">Save Snipp</button> <a href="/snippets" class="btn">Cancel</a></div>
