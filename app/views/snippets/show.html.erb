@@ -31,7 +31,8 @@
 							</div>
 							<div class="span3">
 								<p class="lead"> <h4>Technology :	</h4></p>
-								<p><%= image_tag @snippet.technology.icon_path, :width => "80", :height => "80"%></p>						
+								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-warning"><%= @snippet.technology.name%></span></p>
+								<p><%= image_tag @snippet.technology.icon_path%></p>						
 							</div><br /><br />
 							<div class="span9">
 								<p><strong>Actions : </strong>
