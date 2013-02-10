@@ -30,6 +30,7 @@
                 snippets_path, :class => 'btn' %>
   </div>
 <% end %> -->
+
    <% message = (params[:action] == "edit")? "edit" : "create"%>
 	<div class="alert alert-info">
 	  <button type="button" class="close" data-dismiss="alert">×</button>
@@ -99,5 +100,13 @@
 	  });
 	});	
 </script>
-
-
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $('#code').each(function() {
+	         var editor = CodeMirror.fromTextArea(this, {
+	             lineNumbers : true,
+	             matchBrackets : true
+	         });
+	     })
+	})
+</script>
