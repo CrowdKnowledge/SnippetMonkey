@@ -22,7 +22,7 @@
 <!-- <%= link_to t('.new', :default => t("helpers.links.new")),
             new_snippet_path,
             :class => 'btn btn-primary' %> -->
-<%if Snippet.count == 0%>
+<%if @snippets.blank?%>
     <div class="alert alert-error">
         <button data-dismiss="alert" class="close">&times;</button>
         <strong>Hey Buddy! You resource list is empty.</strong> You could add resources by using the New tab.

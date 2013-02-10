@@ -10,11 +10,14 @@
   <![endif]-->
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= csrf_meta_tags %>
    <%= metamagic :title => "Snippet Monkey", :description => "Start storing the URLs or Blogs or Snippets which helped you to resolve a bug while app development.", :keywords => %w(snippet code programming stackoverflow testing development application web technology blog url) %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body onload="prettyPrint()">
+	
+  <!-- Navigation Starts here -->
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -30,201 +33,204 @@
       </div>
     </div>
   </div>
-<br />
-  <div class="container" style="padding-top: 130px">
-  	<%unless current_user.blank?%>
-  	    <div class="row2">
-  	    	<p><a data-toggle="modal" href="#upload_modal" id="avatar">
-  	    		<%if current_user.avatar_url%>
-  	    		  <div class="span2">
-  	    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+  <br />
+  
+  <!-- Container layout Starts here -->
+    <div class="container-fluid" style="padding-top: 130px">
+	    <div class="row-fluid">
+	    	
+	    	<!--Sidebar content-->
+		    <div class="span2">
+		    	<%unless current_user.blank?%>
+		    	
+			    	<!-- Upload Image is here -->
+					<p><a data-toggle="modal" href="#upload_modal" id="avatar">
+	  	    		<%if current_user.avatar_url%>
+	  	    		  <div class="span2">
+	  	    		  	<%= image_tag current_user.avatar_url, :style => "margin-left: -15px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+						</div>
+	  	    		<%else%>
+	  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image"%>
+	  	    		<%end%>
+	  	    		</a>
+	  	    		</p>
+	  	    		<p><h5><strong>Click To Upload Image</strong></h5></p>
+	    			
+	    			<!-- Upload Image Modal is here -->
+					<div id="upload_modal" class="modal hide fade">
+						<div class="modal-header">
+						<button class="close" data-dismiss="modal">×</button>
+						<h3>Upload User Image</h3>
+						</div>
+						<div class="modal-body">
+							<form name="file"  method="post" action="/users/upload_avatar" class="form-horizontal" enctype="multipart/form-data">
+								<p class="help-block">Select Image</p>
+								<div class="input-prepend">
+									<div class="help-block">
+								<p>
+									<input class="prependedInput" size="16" type="file" name="user_image">
+									<br /><button type="submit" class="btn btn-medium btn-info">Upload</button>
+								</p>
+								</div>
+								</div>
+							</form>
+						</div>
 					</div>
-  	    		<%else%>
-  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image"%>
-  	    		<%end%>
-  	    		</a></p>
-  	    		<p><h5><strong>Click To Upload Image</strong></h5></p>
-    	
-	<div id="upload_modal" class="modal hide fade">
-		<div class="modal-header">
-		<button class="close" data-dismiss="modal">×</button>
-		<h3>Upload User Image</h3>
-		</div>
-		<div class="modal-body">
-			<form name="file"  method="post" action="/users/upload_avatar" class="form-horizontal" enctype="multipart/form-data">
-				<p class="help-block">Select Image</p>
-				<div class="input-prepend">
-					<div class="help-block">
-				<p>
-					<input class="prependedInput" size="16" type="file" name="user_image">
-					<br /><button type="submit" class="btn btn-medium btn-info">Upload</button>
-				</p>
-				</div>
-				</div>
-			</form>
-		</div>
-	</div>
-   
+				<%end%>
+		    </div>
+		    
+		    <vr class="leftline"></vr>
+		    
+		    <!-- Middle container goes here-->
+		    <div class="span10">
+			    <div class="span10">
+					
+					<!-- Middle container data-->
+				    <%count =0%>
+				    <%flash.map do |key,value|%>
+					    <%if user_signed_in?%>
+					    	<%unless value.blank?%>
+								<div class="alert alert-<%= key%>">
+								  <button type="button" class="close" data-dismiss="alert">×</button>
+								  <%case key%>
+								  	<%when "info"%>
+								  		<%flash_string_text = "Hey Buddy,"%>
+								  	<%when "error"%>
+								  		<%flash_string_text = "Oops! Some thing wrong :("%>
+								  <%end%>
+								  <strong><%= flash_string_text%></strong>
+								  <%= value%>
+								</div>
+						<%end%>
+						<%else%>
+							<%unless count == 1%>
+							<div id="alert_info" class="alert alert-info">
+								<% count = 1%>
+								<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
+								<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
+							</div>
+							<%end%>
+							<div id="alert_error" class="alert alert-error">
+							</div>
+							<div id="alert_success" class="alert alert-success">
+							</div>
+						<%end%>
+					<%end%>
+					 <%if user_signed_in?%>
+					<%= yield %>
+				   <%else%>
+				 	<%= yield :session_out_view%>
+				   <%end%>					
 
-    	</div>
-    <%end%>
-    <div class="row">
-      <div class="span9">
-      	<%count =0%>
-    <%flash.map do |key,value|%>
-	    <%if user_signed_in?%>
-	    	<%unless value.blank?%>
-				<div class="alert alert-<%= key%>">
-				  <button type="button" class="close" data-dismiss="alert">×</button>
-				  <%case key%>
-				  	<%when "info"%>
-				  		<%flash_string_text = "Hey Buddy,"%>
-				  	<%when "error"%>
-				  		<%flash_string_text = "Oops! Some thing wrong :("%>
-				  <%end%>
-				  <strong><%= flash_string_text%></strong>
-				  <%= value%>
-				</div>
-			<%end%>
-		<%else%>
-			<%unless count == 1%>
-			<div id="alert_info" class="alert alert-info">
-				<% count = 1%>
-				<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
-				<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
-			</div>
-			<%end%>
-			<div id="alert_error" class="alert alert-error">
-			</div>
-			<div id="alert_success" class="alert alert-success">
-			</div>
-		<%end%>
-	<%end%>
-		 <%if user_signed_in?%>
-      		<%= yield %>
-      	 <%else%>
-      	 	<%= yield :session_out_view%>
-      	 <%end%>
-      	</div>
-      
-      	<%if user_signed_in?%>
-      		<div id="coder_monkey" class="span3">
-      			<%= image_tag "CodeMonkeySketch.jpg"%>
-      		</div>
-      	<%else%>
-      		<div class="span9" id="wana_join">
-      			<%= image_tag "monkey_logo_new.png", :width => "90%", :height => "90%"%>
-      			<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
-      				<a class="btn btn-primary" data-toggle="modal" href="#myModal" style="margin-left: 490px;margin-top: -382px;">Wana Join?</a>
-      			<%end%>
-      		</div>
-      	<%end%>
-      <vr class="rightline">
-      </vr>
-      
-      <!-- Chat Section -->
-      <%if user_signed_in?%>
-	      <div class="chat">
-		    <ul class="nav nav-pills">
-		    	<li><span class="label label-success" style="margin-left: 13px">Who's Online on Snip</span></li>
-		    	<%User.show_online_users.each do |user|%>
-		    		<li class="disabled"><a href="#"><%= image_tag "online_icon_23.jpg"%>&nbsp;&nbsp;<strong><%= user.full_name%></strong></a></li>
-		    	<%end%>
+					
+			    </div>
+			    <vr class="rightline"></vr>
+			    
+			    <!--Monkey sketch and Chat section-->
+			    <div class="span2">
+			    	
+			    	<!-- Code Monkey section. -->
+			    	<div class="row">
+				      	<%if user_signed_in?%>
+				      			<%= image_tag "CodeMonkeySketch.jpg"%>
+				      	<%else%>
+				      		<div class="span9" id="wana_join">
+				      			<%= image_tag "monkey_logo_new.png", :width => "90%", :height => "90%"%>
+				      			<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
+				      				<a class="btn btn-primary" data-toggle="modal" href="#myModal" style="margin-left: 490px;margin-top: -382px;">Wana Join?</a>
+				      			<%end%>
+				      		</div>
+				      	<%end%>
+			      	</div>
+			      	<hr />
+			      	
+			      	<!-- Chat Section -->
+			    	<div class="row">
+				      	<%if user_signed_in?%>
+						    <ul class="nav nav-pills">
+						    	<li><span class="label label-success" style="margin-left: 13px">Who's Online on Snippet</span></li>
+						    	<%User.show_online_users.each do |user|%>
+						    		<li class="disabled"><a href="#"><%= image_tag "online_icon_23.jpg"%>&nbsp;&nbsp;<strong><%= user.full_name%></strong></a></li>
+						    	<%end%>
+						    </ul>
+						<%end%>
+			      	</div>	
+			      	
+			    </div>
+			    
+		    </div>
+	    </div>
+	    
+	
+	   <!-- Advanced Modal -->
+	    <div id="filter_modal" style="display: block; width: 700px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="advancedSort" aria-hidden="true">
+		    <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		    <ul class="nav nav-pills pull-right">
+		    <li class="active">
+		    <a href="#technology" data-toggle="pill">Technology</a>
+		    </li>
+		    <li><a href="#comment" data-toggle="pill">Top Comments</a></li>
+		    <!-- <li><a href="#dealership" data-toggle="pill">Dealership</a></li> -->
 		    </ul>
-		    <!-- <input type="button"
-		    name="toggle" value="toggle" /> -->
-		    <div id="chat_div">
+		    <h4>Advanced Filter</h4>
 		    </div>
-		    <hr />
-		    <div id="log">
+		    <div class="modal-body" style="width: 700px;">
+		    <div class="row-fluid">
+		    <div class="tab-content">
+		    <div class="tab-pane active" id="technology">
+			    <form method="POST" action="/filter" accept-charset="UTF-8">
+			    <div class="controls controls-row">
+			    	<%= hidden_field_tag "mode", "technology"%>
+				    <select name="technology_id">
+						  <%Technology.all.each do |technology|%>
+						  	<%= technology.id%>
+						  	<option value="<%= technology.id%>"><%= technology.name%></option>
+						  <%end%> 
+					</select>
+				    <select name="resource_type">
+				    	<option value="global">Global Resources</option>
+				    	<option value="mine">My Resources</option>
+					</select>
+				    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
+			     </div>
+			    </form>
 		    </div>
-		 </div>
-	<%end%>
-      <vr class="leftline"></vr>
+		    <div class="tab-pane" id="comment">
+			    <form method="POST" action="/filter" accept-charset="UTF-8">
+			    <div class="controls controls-row">
+			    	<%= hidden_field_tag "mode", "comment"%>
+				    <select name="resource_type">
+				    	<option value="global">Global Resources</option>
+				    	<option value="mine">My Resources</option>
+					</select>
+				    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
+			     </div>
+			    </form>
+		    </div>
+		    </div>
+		    </div>
+		    </div>
+	    </div>	
+	
     </div>
- 
-  </div>
- 
- 
-    <!-- Advanced Modal -->
-    <div id="filter_modal" style="display: block; width: 700px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="advancedSort" aria-hidden="true">
-    <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <ul class="nav nav-pills pull-right">
-    <li class="active">
-    <a href="#technology" data-toggle="pill">Technology</a>
-    </li>
-    <li><a href="#comment" data-toggle="pill">Top Comments</a></li>
-    <!-- <li><a href="#dealership" data-toggle="pill">Dealership</a></li> -->
-    </ul>
-    <h4>Advanced Filter</h4>
-    </div>
-    <div class="modal-body" style="width: 700px;">
-    <div class="row-fluid">
-    <div class="tab-content">
-    <div class="tab-pane active" id="technology">
-	    <form method="POST" action="/filter" accept-charset="UTF-8">
-	    <div class="controls controls-row">
-	    	<%= hidden_field_tag "mode", "technology"%>
-		    <select name="technology_id">
-				  <%Technology.all.each do |technology|%>
-				  	<%= technology.id%>
-				  	<option value="<%= technology.id%>"><%= technology.name%></option>
-				  <%end%> 
-			</select>
-		    <select name="resource_type">
-		    	<option value="global">Global Resources</option>
-		    	<option value="mine">My Resources</option>
-			</select>
-		    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
-	     </div>
-	    </form>
-    </div>
-    <div class="tab-pane" id="comment">
-	    <form method="POST" action="/filter" accept-charset="UTF-8">
-	    <div class="controls controls-row">
-	    	<%= hidden_field_tag "mode", "comment"%>
-		    <select name="resource_type">
-		    	<option value="global">Global Resources</option>
-		    	<option value="mine">My Resources</option>
-			</select>
-		    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
-	     </div>
-	    </form>
-    </div>
-    <div class="tab-pane" id="dealership">
-    <form>
-    <fieldset>
-    <div class="controls controls-row">
-    <input type="text" class="span8" placeholder="Location">
-    <select class="span4">
-    <option>City</option>
-    <option>Los Angeles</option>
-    <option>Tokyo</option>
-    <option>New York</option>
-    <option>London</option>
-    </select>
-    </div>
-    <button type="submit" class="btn btn-warning">Sort</button>
-    </fieldset>
-    </form>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+
 </body>
 
-	<hr />
+<hr />
+
+	<!-- Footer Starts here -->
 
 	<footer>
 		<div class="container">
-	<p>Snippet Monkey.com was crafted by <a href="https://github.com/kannancet" target="_blank">Snippet Team</a> 2013. | <a href=<%= privacy_policy_path%> target="_blank">Site Privacy policy</a> | All snippets are <a href="<%= license_path%>">MIT license.</a> | Built with <a href="http://rubyonrails.org/" target="_blank" title="Ruby on Rails">Ruby on Rails<%= image_tag "rails.png", :width => "32", :height => "32"%></a> </p>
+	<p>Snippet Monkey.com was crafted by <a href="https://github.com/kannancet" target="_blank">Snippet Team</a> 2013. | <a href=<%= privacy_policy_path%> target="_blank">Site Privacy policy</a> | All snippets are <a href="<%= license_path%>">MIT license.</a> | Built with <a href="http://rubyonrails.org/" target="_blank" title="Ruby on Rails">Ruby on Rails&nbsp;&nbsp;<%= image_tag "rails.png", :width => "32", :height => "32"%></a> </p>
 	</div>
       <div class="container">
         <p><strong><h6 style="padding-left:90px;">Copyright © 2013 - Snippet Team. All Rights Reserved</strong>  | <strong>Email</strong> : team.snippet.monkey@gmail.com </p>
       </div>
     </footer>
+    
+    
 </html>
 
 <script>

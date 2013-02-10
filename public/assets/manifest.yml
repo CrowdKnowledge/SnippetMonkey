@@ -53,6 +53,8 @@ monkey_logo.png: monkey_logo-9e1f568165d12ca724c7cefc2d98d3c6.png
 monkey_logo/index.png: monkey_logo-9e1f568165d12ca724c7cefc2d98d3c6.png
 monkey_logo_new.png: monkey_logo_new-94fc7b31d8a24ea241cf31c02472208e.png
 monkey_logo_new/index.png: monkey_logo_new-94fc7b31d8a24ea241cf31c02472208e.png
+monkey_logo_scaled.png: monkey_logo_scaled-5f8829c17a7338f8d8a775a4bec06af9.png
+monkey_logo_scaled/index.png: monkey_logo_scaled-5f8829c17a7338f8d8a775a4bec06af9.png
 online_icon.png: online_icon-29e59ad720bb356552dc983fd6a6e396.png
 online_icon/index.png: online_icon-29e59ad720bb356552dc983fd6a6e396.png
 online_icon_23.jpg: online_icon_23-6a7d819c569fa58efce8eb5e1951c99c.jpg
