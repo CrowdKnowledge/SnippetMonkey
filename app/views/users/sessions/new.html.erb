@@ -1,18 +1,27 @@
-<%content_for :session_out_view do %>
-     
+<%= content_for :session_out_view do %>
+	<div class="alert alert-info">
+		<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
+		<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
+	<%= image_tag "monkey_logo_new.png", :width => "70%", :height => "70%"%>
+	<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
+		<br />&nbsp;<a class="btn btn-primary" data-toggle="modal" href="#myModal" style="margin-left: 305px; margin-top: -381px;">Wana Join?</a>
+		<strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+		<a class="btn btn-primary" href="https://s3.amazonaws.com/snippet-monkey/intro.html" style="margin-bottom: 21px; margin-top: -361px;" target="_blank">Know About Me?</a>
+	<%end%>
+	</div>     
     <div class="modal hide" id="myModal">
 	    <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">x</button>
-	    <%= image_tag "monkey_logo.png", :width => "80", :height => "80", :class => "span2"%>
+	    <%= image_tag "monkey_logo.png", :width => "80", :height => "80", :class => "span4"%>
 	    <h3>Login to Snippet Monkey</h3>
 	    </div>
 	    <div class="modal-body">
 	    <form method="post" action='' name="login_form">
 	    <div class="input-prepend">
-	    <p><span class="add-on"><i class="icon-envelope"></i></span><input type="email" class="span3" name="email" id="email" placeholder="Email"></p>
+	    <p><span class="add-on"><i class="icon-envelope"></i></span><input type="email" class="span9" name="email" id="email" placeholder="Email"></p>
 	    </div>
 	    <div class="input-prepend">
-	    <p><span class="add-on"><i class="icon-certificate"></i></span><input type="password" class="span3" name="password" placeholder="Password"></p>
+	    <p><span class="add-on"><i class="icon-certificate"></i></span><input type="password" class="span9" name="password" placeholder="Password"></p>
 	    </div>
 	    <p><button type="submit" class="btn btn-primary">Sign in</button>
 	    <a class="btn btn-primary" data-toggle="modal" href="#password_recovery_modal" >Forgot Password?</a> OR 		    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "facebook.jpg"%></a>

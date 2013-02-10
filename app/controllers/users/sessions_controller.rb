@@ -32,7 +32,7 @@ class Users::SessionsController < Devise::SessionsController
         redirect_to root_url
     else
       flash[:account_activation_fail] = "Email or Password is incorrect." 
-      redirect_to new_user_session_path and return
+      redirect_to root_url and return
     end
   end
 

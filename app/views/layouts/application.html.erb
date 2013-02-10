@@ -83,10 +83,9 @@
 		    
 		    <!-- Middle container goes here-->
 		    <div class="span10">
-			    <div class="span10">
+			    <div class="span10" style="margin-left: -14px;">
 					
 					<!-- Middle container data-->
-				    <%count =0%>
 				    <%flash.map do |key,value|%>
 					    <%if user_signed_in?%>
 					    	<%unless value.blank?%>
@@ -101,15 +100,8 @@
 								  <strong><%= flash_string_text%></strong>
 								  <%= value%>
 								</div>
-						<%end%>
-						<%else%>
-							<%unless count == 1%>
-							<div id="alert_info" class="alert alert-info">
-								<% count = 1%>
-								<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
-								<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
-							</div>
 							<%end%>
+						<%else%>
 							<div id="alert_error" class="alert alert-error">
 							</div>
 							<div id="alert_success" class="alert alert-success">
@@ -117,30 +109,19 @@
 						<%end%>
 					<%end%>
 					 <%if user_signed_in?%>
-					<%= yield %>
+						<%= yield %>
 				   <%else%>
 				 	<%= yield :session_out_view%>
-				   <%end%>					
-
-					
+				   <%end%>	
 			    </div>
 			    <vr class="rightline"></vr>
 			    
 			    <!--Monkey sketch and Chat section-->
-			    <div class="span2">
+			    <div class="span2" style="padding-left: 25px;">
 			    	
 			    	<!-- Code Monkey section. -->
 			    	<div class="row">
-				      	<%if user_signed_in?%>
-				      			<%= image_tag "CodeMonkeySketch.jpg"%>
-				      	<%else%>
-				      		<div class="span9" id="wana_join">
-				      			<%= image_tag "monkey_logo_new.png", :width => "90%", :height => "90%"%>
-				      			<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
-				      				<a class="btn btn-primary" data-toggle="modal" href="#myModal" style="margin-left: 490px;margin-top: -382px;">Wana Join?</a>
-				      			<%end%>
-				      		</div>
-				      	<%end%>
+				      	<%= image_tag "CodeMonkeySketch.jpg"%>
 			      	</div>
 			      	<hr />
 			      	
@@ -161,58 +142,7 @@
 		    </div>
 	    </div>
 	    
-	
-	   <!-- Advanced Modal -->
-	    <div id="filter_modal" style="display: block; width: 700px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="advancedSort" aria-hidden="true">
-		    <div class="modal-header">
-		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		    <ul class="nav nav-pills pull-right">
-		    <li class="active">
-		    <a href="#technology" data-toggle="pill">Technology</a>
-		    </li>
-		    <li><a href="#comment" data-toggle="pill">Top Comments</a></li>
-		    <!-- <li><a href="#dealership" data-toggle="pill">Dealership</a></li> -->
-		    </ul>
-		    <h4>Advanced Filter</h4>
-		    </div>
-		    <div class="modal-body" style="width: 700px;">
-		    <div class="row-fluid">
-		    <div class="tab-content">
-		    <div class="tab-pane active" id="technology">
-			    <form method="POST" action="/filter" accept-charset="UTF-8">
-			    <div class="controls controls-row">
-			    	<%= hidden_field_tag "mode", "technology"%>
-				    <select name="technology_id">
-						  <%Technology.all.each do |technology|%>
-						  	<%= technology.id%>
-						  	<option value="<%= technology.id%>"><%= technology.name%></option>
-						  <%end%> 
-					</select>
-				    <select name="resource_type">
-				    	<option value="global">Global Resources</option>
-				    	<option value="mine">My Resources</option>
-					</select>
-				    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
-			     </div>
-			    </form>
-		    </div>
-		    <div class="tab-pane" id="comment">
-			    <form method="POST" action="/filter" accept-charset="UTF-8">
-			    <div class="controls controls-row">
-			    	<%= hidden_field_tag "mode", "comment"%>
-				    <select name="resource_type">
-				    	<option value="global">Global Resources</option>
-				    	<option value="mine">My Resources</option>
-					</select>
-				    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
-			     </div>
-			    </form>
-		    </div>
-		    </div>
-		    </div>
-		    </div>
-	    </div>	
-	
+	<%= render :partial => 'layouts/filter_form'%>
     </div>
 
 </body>

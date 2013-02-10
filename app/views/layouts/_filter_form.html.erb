@@ -1,0 +1,50 @@
+   <!-- Advanced Modal -->
+<div id="filter_modal" style="display: block; width: 700px;" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="advancedSort" aria-hidden="true">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+<ul class="nav nav-pills pull-right">
+<li class="active">
+<a href="#technology" data-toggle="pill">Technology</a>
+</li>
+<li><a href="#comment" data-toggle="pill">Top Comments</a></li>
+<!-- <li><a href="#dealership" data-toggle="pill">Dealership</a></li> -->
+</ul>
+<h4>Advanced Filter</h4>
+</div>
+<div class="modal-body" style="width: 700px;">
+<div class="row-fluid">
+<div class="tab-content">
+<div class="tab-pane active" id="technology">
+<form method="POST" action="/filter" accept-charset="UTF-8">
+<div class="controls controls-row">
+	<%= hidden_field_tag "mode", "technology"%>
+    <select name="technology_id">
+		  <%Technology.all.each do |technology|%>
+		  	<%= technology.id%>
+		  	<option value="<%= technology.id%>"><%= technology.name%></option>
+		  <%end%> 
+	</select>
+    <select name="resource_type">
+    	<option value="global">Global Resources</option>
+    	<option value="mine">My Resources</option>
+	</select>
+    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
+ </div>
+</form>
+</div>
+<div class="tab-pane" id="comment">
+<form method="POST" action="/filter" accept-charset="UTF-8">
+<div class="controls controls-row">
+	<%= hidden_field_tag "mode", "comment"%>
+    <select name="resource_type">
+    	<option value="global">Global Resources</option>
+    	<option value="mine">My Resources</option>
+	</select>
+    <button style="margin-bottom: 15px" type="submit" class="btn btn-warning">Filter</button>
+ </div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>	
