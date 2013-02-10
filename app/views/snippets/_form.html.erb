@@ -80,7 +80,10 @@
 	<div class="control-group">
 		<label for="description" class="control-label">Code Snippet for the Resource </label>
 		<div class="well">
-			<textarea class="prettyprint linenums" placeholder="Enter Snippet Code" rows="2" class="span8" name="code" id="code" cols="50" value="<%= @snippet.code%>"></textarea>
+			
+			<textarea name="code" class="prettyprint linenums" id="code">
+				<%= @snippet.code%>
+			</textarea>
 		</div>
 		<div class="form-actions"><button class="btn-primary btn" type="submit">Save Snipp</button> <a href="/snippets" class="btn">Cancel</a></div>
 	</div>
