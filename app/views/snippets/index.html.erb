@@ -107,11 +107,11 @@
 									<h3>Type a Comment</h3>
 									</div>
 									<div class="modal-body">
-									    <div class="span4 well">
+									    <div class="well">
 									    <form accept-charset="UTF-8" action="<%= add_snippet_comment_snippet_path(snippet.id)%>" method="POST">
-									    <textarea class="span4" id="new_message" name="message"
-									    placeholder="Type in your comment" rows="5"></textarea>
-									    <h6 class="pull-right">Remaining<div id="chars">320</div></h6>
+									    <textarea id="new_message" name="message"
+									    placeholder="Type in your comment" rows="10"></textarea>
+									    <h6 class="pull-right">Remaining<div id="chars">320</div></h6><br />
 									    <button class="btn btn-info" type="submit">Post Comment</button>
 									    </form>
 									    </div>
@@ -182,7 +182,7 @@
 	</table>
 	<%= render "layouts/pagination"%>
 <%end%>
-<!-- <script>
+<script>
 $(document).ready(function(){
 	var elem = $("#chars");
 	$("#new_message").limiter(320, elem);
@@ -206,7 +206,7 @@ $(document).ready(function(){
 	    });
 	})(jQuery);
 
-</script> -->
+</script>
 <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51078afc42a872c8"></script>
 
