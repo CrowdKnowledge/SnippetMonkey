@@ -81,7 +81,7 @@
 							</div>
 							<div class="span3">
 								<p class="lead"> <h4>Technology :	</h4></p>
-								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-warning"><%= snippet.technology.name%></span></p>
+								<p><span class="label label-warning"><%= snippet.technology.name%></span></p>
 								<%if snippet.technology.icon_path%>
 									<p><%= image_tag snippet.technology.icon_path, :width => "80", :height => "80"%></p>
 								<%else%>
@@ -90,7 +90,7 @@
 							</div><br /><br />
 							<div class="span9">
 								<p><strong>Actions : </strong>
-										<%if snippet.user_id == current_user.id%>
+										<%if current_user && snippet.user_id == current_user.id%>
 								    		<a href=<%= edit_snippet_path(snippet)%>><i class="icon-edit"></i><span class="label label-info"></span> </a> 
 								    		<a href=<%= delete_resource_snippet_path(snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
 								    	<%end%>
