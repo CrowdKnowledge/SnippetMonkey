@@ -32,8 +32,8 @@ SniptMonkey::Application.routes.draw do
    match "/snippet_monkey/users/activate_account/(:confirmation_token)" => "users/registrations#activate_account", :via => :get, :as => :user_account_activation
    post "verify_account_confirmation", :to => "users/sessions#verify_account_confirmation"
    post "user/recover_password", :to => "users/activities#recover_password"
-   get "user/edit_password_via_recovery", :to => "users/activities#edit_password_via_recovery", :as => :edit_password_via_recovery
-   post "user/update_password_via_recovery", :to => "users/activities#update_password_via_recovery"
+   get "user/edit_password_via_recovery/:id", :to => "users/activities#edit_password_via_recovery", :as => :edit_password_via_recovery
+   post "user/update_password_via_recovery/:id", :to => "users/activities#update_password_via_recovery"
    get "/user_avatars/:image.:format", :to => "users/activities#render_avatar_image"
  get "/maintainance.html", :to => "users/activities#maintainance"
  get "/page_not_found.html", :to => "users/activities#page_not_found"

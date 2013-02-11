@@ -8,6 +8,8 @@
 
 technologies = [{:name => 'My Custom Language', 
                 :icon_path => '404.jpg'},
+                {:name => 'Android', 
+                :icon_path => 'android.png'},
                 {:name => 'Django', 
                 :icon_path => 'django.jpg'},
                 {:name => 'Python',
