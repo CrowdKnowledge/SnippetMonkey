@@ -20,6 +20,7 @@ SniptMonkey::Application.routes.draw do
    post '/users/change_profile_info' => 'users/activities#change_profile_info'
    post '/users/change_password' => 'users/activities#change_password'
    get '/users/profile' => 'users/activities#view_profile'
+   get '/users/public_profile/:id' => 'users/activities#view_public_profile'
    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
    get "users/sign_out", :to => "users/sessions#destroy"
    match "/user/sign_up", :to => "users/registrations#sign_up", :via => :post

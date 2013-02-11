@@ -16,7 +16,7 @@
 		<div class="row" style="padding-left: 200px;">
 			<p class="text-info">
 				<h2><%= image_tag "face-monkey.png"%>
-					<%= link_to truncate(@snippet.heading.capitalize, :length => 15, :omission => '...(continued)'), snippet_path(@snippet), :class => "text-info"%>
+					<%= link_to truncate(@snippet.heading.capitalize, :length => 12, :omission => '...(continued)'), snippet_path(@snippet), :class => "text-info"%>
 			        <%if @snippet.security == "public"%>
 			        	<span class="label label-success"><%= @snippet.security%></span>
 			       	<%else%>

@@ -1,35 +1,47 @@
+<p><h3><%= @user.full_name%></h3></p>
 
-<%- model_class = Snippet -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => "Resources" %>
-  <%if params[:security]%>
-  	<%icon_type = (params[:security] == "public") ? "success" : "important"%>
-  	<span class="label label-<%= icon_type%>"><%= params[:security]%></span>
-  <%else%>
-  	<span class="label label-warning">global</span>
-  <%end%>
-
-  </h1>
-<%unless params[:action] == "edit"%>
-	<div class="alert alert-info">
-	  <button type="button" class="close" data-dismiss="alert">×</button>
-	  <strong>Have you ever thought? oh! I had solved this issue before using a blog but can't find it again :(</strong><br /> 
-	  Don't worry, start using Snippet Monkey to back up your resource URLs here for future development.<br />
-	  You can search and find or share it with your friends when you come across the same issue again.
-	</div>
-<%end%>
-</div>
-<!-- <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_snippet_path,
-            :class => 'btn btn-primary' %> -->
-<%if @snippets.blank?%>
-    <div class="alert alert-error">
-        <button data-dismiss="alert" class="close">&times;</button>
-        <strong>Hey Buddy! You resource list is empty.</strong> You could add resources by using the New tab.
-    </div>
-    <%= image_tag "empty_monkey.jpg"%>
-<%else%>
-	<%= render "layouts/pagination"%>
+<div class="well">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#full_profile" data-toggle="tab">Full Profile</a></li>
+      <li><a href="#home" data-toggle="tab">User Snippets</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+            <div class="tab-pane active in" id="full_profile">
+				<table class="table table-striped">
+				  <thead>
+				    <tr>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <!-- <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<tr>
+				  		<td>
+			    		  	<%if @user.avatar_url%>
+			    		  		<%= image_tag @user.avatar_url, :width => "120", :height => "120", :alt => "Upload Image", :style => "margin-left: 10px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+							<%else%>
+								<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image", :style => "margin-left: 10px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+							<%end%>
+				  		</td>
+				  		<td>
+				  			<div class="span3">
+				  				<div class="input-prepend">
+				  				<p><i class="icon-user"></i> <h2><%= @user.full_name%></h2></p>
+				  				</div>
+				  				<p><h5><%= @user.email%></h5></p>
+				  				<p><%= @user.address%></p>
+				  			</div>
+				  		</td>
+				  	</tr>
+					</tbody>
+				</table>
+      		</div>
+      <div class="tab-pane fade" id="home" style="padding-left: 20px;">
 	<table class="table table-striped">
 	  <thead>
 	    <tr>
@@ -43,7 +55,7 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	    <% @snippets.each do |snippet| %>
+	    <% @user.snippets.each do |snippet| %>
 			      <tr onclick="location.href='<%= snippet_path(snippet)%>'">
 				 		<div class="row">
 				 			<p class="text-info">
@@ -95,7 +107,7 @@
 								    		<a href=<%= delete_resource_snippet_path(snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
 								    	<%end%>
 								    	<a id="comment_icon" data-toggle="modal" href="#comment_modal_<%= snippet.id%>"><i class="icon-comment"></i><span class="label label-info"></span> </a>
-								    	| <i class="icon-user"></i> <a href="/users/public_profile/<%= snippet.user_id%>"><%= snippet.user.first_name%></a> 
+								    	| <i class="icon-user"></i> <a href="#"><%= snippet.user.first_name%></a> 
 								    	| <i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%>
 								     	| <i class="icon-comment"></i> <a href="<%= show_comments_snippet_path(snippet)%>"><%= snippet.comments.size%> Comments</a>
 								       	| <i class="icon-share"></i> <a href="#" id="share"><%= snippet.share_count%> Shares</a>
@@ -185,91 +197,15 @@
 	    <% end %>
 	  </tbody>
 	</table>
-	<%= render "layouts/pagination"%>
-<%end%>
+	
+      </div>
+      
+  </div>
+</div>
 <script>
-$(document).ready(function(){
-	var elem = $("#chars");
-	$("#new_message").limiter(320, elem);
-});
-		(function($) {
-	    $.fn.extend( {
-	        limiter: function(limit, elem) {
-	            $(this).on("keyup focus", function() {
-	                setCount(this, elem);
-	            });
-	            function setCount(src, elem) {
-	                var chars = src.value.length;
-	                if (chars > limit) {
-	                    src.value = src.value.substr(0, limit);
-	                    chars = limit;
-	                }
-	                elem.html( limit - chars );
-	            }
-	            setCount($(this)[0], elem);
-	        }
-	    });
-	})(jQuery);
-
-</script>
-<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51078afc42a872c8"></script>
-
-
-<script type="text/javascript">
-// Alert a message when the user shares somewhere
-function eventHandler(evt) { 
-    switch (evt.type) {
-        case "addthis.menu.open":
-            console.log('menu opened; surface=' + evt.data.pane);
-            break;
-        case "addthis.menu.close":
-            console.log('menu closed; surface=' + evt.data.pane);
-            break;
-        case "addthis.menu.share":
-            console.log('user shared to ' + evt.data.service);
-			$.ajax({
-						type: "POST",
-						beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));},
-						url: 'snippet/share_count',
-						data: {url: evt.data.url},
-						success: function(msg){
-							console.log("Success")
-							//$("#alert_success").html("Successfully shared the resource.")
-							//$("#alert_success").show()
-						},
-						error: function(msg){
-							//$("#alert_error").html("OOps! something went wrong. Unable to share at this point :(")
-							//$("#alert_error").show()
-						}
-					});
-            break;
-        default:
-            console.log('received an unexpected event', evt);
-    }
-    
-    if (evt.type == 'addthis.menu.share') { 
-         console.log(evt); // evt.data.service is specific to the "addthis.menu.share" event
-		$.ajax({
-					type: "POST",
-					beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));},
-					url: 'snippet/share_count',
-					data: {url: evt.data.url},
-					success: function(msg){
-						console.log("Success")
-						//$("#alert_success").html("Successfully shared the resource.")
-						//$("#alert_success").show()
-					},
-					error: function(msg){
-						//$("#alert_error").html("OOps! something went wrong. Unable to share at this point :(")
-						//$("#alert_error").show()
-					}
-				});
-    }
-}
-
-// Listen to various events
-addthis.addEventListener('addthis.menu.open', eventHandler);
-addthis.addEventListener('addthis.menu.close', eventHandler);
-addthis.addEventListener('addthis.menu.share', eventHandler);
+	$(document).ready(function(){
+		console.log($("#coder_monkey"));
+		$("#coder_monkey").css("padding-left", "690px");
+		$("#coder_monkey").css("margin-top", "-380px");
+	})
 </script>

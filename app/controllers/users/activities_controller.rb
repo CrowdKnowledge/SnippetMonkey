@@ -100,4 +100,11 @@ class Users::ActivitiesController < ApplicationController
     send_file(path, :disposition => 'inline')
   end
   
+=begin
+  Render public profile. 
+=end
+  def view_public_profile
+    @user = User.find_by_id(params[:id])
+  end
+  
 end

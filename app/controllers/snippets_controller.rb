@@ -155,13 +155,9 @@ class SnippetsController < ApplicationController
     snippet = Snippet.where(:absolute_url => params['url']).first
     if snippet
       share_count = snippet.share_count + 1
-      begin
-        snippet.update_attributes!(:share_count => share_count)
-        return true
-      rescue Exception => e
-        return false
-      end
+      snippet.update_attributes!(:share_count => share_count)
     end
+    return true
   end
   
   
