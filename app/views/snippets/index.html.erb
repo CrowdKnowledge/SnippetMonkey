@@ -98,7 +98,7 @@
 								    	| <i class="icon-user"></i> <a href="#"><%= snippet.user.first_name%></a> 
 								    	| <i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%>
 								     	| <i class="icon-comment"></i> <a href="<%= show_comments_snippet_path(snippet)%>"><%= snippet.comments.size%> Comments</a>
-								       	| <i class="icon-share"></i> <a href="#">39 Shares</a>
+								       	| <i class="icon-share"></i> <%= snippet.share_count%> Shares
 								</p>
 								
 								<div id="comment_modal_<%= snippet.id%>" class="modal hide fade">
@@ -216,3 +216,44 @@ $(document).ready(function(){
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51078afc42a872c8"></script>
 
 
+<script type="text/javascript">
+// Alert a message when the user shares somewhere
+function eventHandler(evt) { 
+    switch (evt.type) {
+        case "addthis.menu.open":
+            console.log('menu opened; surface=' + evt.data.pane);
+            break;
+        case "addthis.menu.close":
+            console.log('menu closed; surface=' + evt.data.pane);
+            break;
+        case "addthis.menu.share":
+            console.log('user shared to ' + evt.data.service);
+            break;
+        default:
+            console.log('received an unexpected event', evt);
+    }
+    
+    if (evt.type == 'addthis.menu.share') { 
+         console.log(evt); // evt.data.service is specific to the "addthis.menu.share" event
+		$.ajax({
+					type: "POST",
+					beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $j('meta[name="csrf-token"]').attr('content'));},
+					url: 'snippet/share_count',
+					data: {url: evt.data.url},
+					success: function(msg){
+						$("#alert_success").html("Successfully shared the resource.")
+						$("#alert_success").show()
+					},
+					error: function(msg){
+						$("#alert_error").html("OOps! something went wrong. Unable to share at this point :(")
+						$("#alert_error").show()
+					}
+				});
+    }
+}
+
+// Listen to various events
+addthis.addEventListener('addthis.menu.open', eventHandler);
+addthis.addEventListener('addthis.menu.close', eventHandler);
+addthis.addEventListener('addthis.menu.share', eventHandler);
+</script>
