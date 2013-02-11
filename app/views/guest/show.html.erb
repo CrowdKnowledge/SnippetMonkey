@@ -1,0 +1,115 @@
+<%= content_for :session_out_view do%>
+				 		<div class="row">
+				 			<p class="text-info">
+				 				<h1><%= @snippet.heading.capitalize%><h1>
+								<h1><%= image_tag "face-monkey.png"%>
+									
+							        <%if @snippet.security == "public"%>
+							        	<span class="label label-success"><%= @snippet.security%></span>
+							       	<%else%>
+							       		<span class="label label-important"><%= @snippet.security%></span>
+							       	<%end%>
+								</h1>
+							</p>
+							<div class="span3">
+								<p class="lead"> <h4>Resource :	</h4></p>
+								<p>
+								<a href=<%= @snippet.absolute_url%>><span class="label label-info">GoTo Resource URL</span></a>
+								</p>
+								<p class="muted">
+									Resource created on:
+								</p>
+								<p><i class="icon-calendar"></i> <%= @snippet.created_at.strftime("%B %d, %Y %T")%></p>
+								<p class="muted">
+									Authored By:
+								</p>
+								<p><i class="icon-envelope"></i> <%= @snippet.user.email%></p>
+
+							</div>
+							<div class="span3">
+								<p class="lead"> <h4>Description :	</h4></p>
+								<p><%= @snippet.description%></p>
+							</div>
+							<div class="span3">
+								<p class="lead"> <h4>Technology :	</h4></p>
+								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-warning"><%= @snippet.technology.name%></span></p>
+								<p><%= image_tag @snippet.technology.icon_path%></p>						
+							</div><br /><br />
+							<div class="span9">
+								<p><strong>Actions : </strong>
+										<%if current_user && @snippet.user_id == current_user.id%>
+								    		<a href=<%= edit_snippet_path(@snippet)%>><i class="icon-edit"></i><span class="label label-info"></span> </a> 
+								    		<a href=<%= delete_resource_snippet_path(@snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
+								    	<%end%>
+								    	<a id="comment_icon" data-toggle="modal" href="#comment_modal"><i class="icon-comment"></i><span class="label label-info"></span> </a>
+								    	| <i class="icon-user"></i> <a href="#"><%= @snippet.user.first_name%></a> 
+								    	| <i class="icon-calendar"></i> <%= @snippet.created_at.strftime("%B %d, %Y %T")%>
+								     	| <i class="icon-comment"></i> <a href="#"><%= @snippet.comments.size%> Comments</a>
+								       	| <i class="icon-share"></i> <a href="#">39 Shares</a>
+								</p>
+
+								<div id="comment_modal" class="modal hide fade">
+									<div class="modal-header">
+									<button class="close" data-dismiss="modal">×</button>
+									<h3>Type a Comment</h3>
+									</div>
+									<div class="modal-body">
+									    <div class="span4 well">
+									    <form accept-charset="UTF-8" action="<%= add_snippet_comment_snippet_path(@snippet)%>" method="POST">
+									    <textarea class="span4" id="new_message" name="message"
+									    placeholder="Type in your comment" rows="5"></textarea>
+									    <h6 class="pull-right">Remaining<div id="chars">320</div></h6>
+									    <button class="btn btn-info" type="submit">Post Comment</button>
+									    </form>
+									    </div>
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+				<!-- AddThis Button BEGIN -->
+				<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+					<a  addthis:title="<%= @snippet.heading%>"
+						addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+						addthis:description="<%= @snippet.description%>"
+						class="addthis_button_preferred_1">
+					</a>
+					<a addthis:title="<%= @snippet.heading%>" 
+					   addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+					   addthis:description="<%= @snippet.description%>"
+					   class="addthis_button_preferred_2">
+					</a>
+					<a addthis:title="<%= @snippet.heading%>" 
+					   addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+					   addthis:description="<%= @snippet.description%>"
+					   class="addthis_button_preferred_3">
+					</a>
+					<a  addthis:title="<%= @snippet.heading%>" 
+						addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+						addthis:description="<%= @snippet.description%>"
+						class="addthis_button_preferred_4">
+					</a>
+					<a addthis:title="<%= @snippet.heading%>"
+					   addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+					   addthis:description="<%= @snippet.description%>"
+					   class="addthis_button_compact">
+					</a>
+					<a addthis:title="<%= @snippet.heading%>"
+					   addthis:url="<%= @snippet.absolute_url || snippet_url(@snippet)%>"
+					   addthis:description="<%= @snippet.description%>"
+					   class="addthis_counter addthis_bubble_style">
+					</a>
+				</div>
+				<!-- AddThis Button END -->
+				<h1>Code Snippet<h1>
+				<p>
+					<%if @snippet.code%>
+				<pre class="prettyprint linenums:1">
+					<%= @snippet.code%>
+				</pre>		
+					<%end%>
+				</p>
+			      <div class="span9"> <hr/></div>
+<%end%>

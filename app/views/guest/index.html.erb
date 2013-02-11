@@ -1,0 +1,290 @@
+<%= content_for :session_out_view do%>
+
+
+<%- model_class = Snippet -%>
+	<div class="alert alert-info">
+	  <button type="button" class="close" data-dismiss="alert">×</button>
+	  <strong>Have you ever thought? oh! I had solved this issue before using a blog but can't find it again :(</strong><br /> 
+	  Don't worry, start using Snippet Monkey to back up your resource URLs here for future development.<br />
+	  You can search and find or share it with your friends when you come across the same issue again.
+	</div>
+<!-- <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_snippet_path,
+            :class => 'btn btn-primary' %> -->
+<%if @snippets.blank?%>
+    <div class="alert alert-error">
+        <button data-dismiss="alert" class="close">&times;</button>
+        <strong>Hey Buddy! You resource list is empty.</strong> You could add resources by using the New tab.
+    </div>
+    <%= image_tag "empty_monkey.jpg"%>
+<%else%>
+	<%= render "layouts/pagination"%>
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <th></th>
+	      <!-- <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @snippets.each do |snippet| %>
+			      <tr onclick="location.href='<%= snippet_path(snippet)%>'">
+				 		<div class="row">
+				 			<p class="text-info">
+								<h2><%= image_tag "face-monkey.png"%>
+									<%= link_to truncate(snippet.heading.camelize, :length => 12, :omission => '...(continued)'), guest_snippet_show_path(snippet), :class => "text-info"%>
+							        <%if snippet.security == "public"%>
+							        	<span class="label label-success"><%= snippet.security%></span>
+							       	<%else%>
+							       		<span class="label label-important"><%= snippet.security%></span>
+							       	<%end%>
+								</h2>
+							</p>
+							<div class="span3">
+								<p class="lead"> <h4>Resource :	</h4></p>
+								<p>
+								<a href=<%= snippet.absolute_url%> target="_blank"><span class="label label-info">GoTo Resource URL</span></a>
+								</p>
+								<p class="muted">
+									Resource created on:
+								</p>
+								<p><i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%></p>
+								<p class="muted">
+									Authored By:
+								</p>
+								<p><i class="icon-envelope"></i> <%= snippet.user.email%></p>
+
+							</div>
+							<div class="span3">
+								<p class="lead"> <h4>Description :	</h4></p>
+								<p><%= truncate(snippet.description, :length => 50, :omission => '...(more)')%></p>
+								<p><a data-toggle="modal" href="#desc_view" ><span class="label label-sucess"> Read Description </span></a></p>
+								<%if snippet.code%>	
+									<p>&nbsp;&nbsp;&nbsp;<a data-toggle="modal" href="#snippet_view" ><span class="label label-sucess"> View  Snippet </span></a></p>
+								<%end%>
+							</div>
+							<div class="span3">
+								<p class="lead"> <h4>Technology :	</h4></p>
+								<p><span class="label label-warning"><%= snippet.technology.name%></span></p>
+								<%if snippet.technology.icon_path%>
+									<p><%= image_tag snippet.technology.icon_path, :width => "80", :height => "80"%></p>
+								<%else%>
+									<p><%= image_tag "404.jpg"%></p>		
+								<%end%>	
+							</div><br /><br />
+							<div class="span9">
+								<p><strong>Actions : </strong>
+								    	<a href="#"><i class="icon-edit"></i><span class="label label-info"></span> </a> 
+								    	<a href="#"><i class="icon-trash"></i><span class="label label-info"></span> </a> 
+								    	<a id="comment_icon" data-toggle="modal" href="#"><i class="icon-comment"></i><span class="label label-info"></span> </a>
+								    	| <i class="icon-user"></i> <a href="#"><%= snippet.user.first_name%></a> 
+								    	| <i class="icon-calendar"></i> <%= snippet.created_at.strftime("%B %d, %Y %T")%>
+								     	| <i class="icon-comment"></i> <a href="#"><%= snippet.comments.size%> Comments</a>
+								       	| <i class="icon-share"></i> <a href="#" id="share"><%= snippet.share_count%> Shares</a>
+								</p>
+							</div>
+						</div>
+			      </tr>
+				<!-- AddThis Button BEGIN -->
+				<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+					<a  addthis:title="<%= snippet.heading%>  via  http://www.snippet-monkey.com/"
+						addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+						addthis:description="<%= snippet.description%>"
+						class="addthis_button_preferred_1">
+					</a>
+					<a addthis:title="<%= snippet.heading%> via  http://www.snippet-monkey.com/" 
+					   addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+					   addthis:description="<%= snippet.description%>"
+					   class="addthis_button_preferred_2">
+					</a>
+					<a addthis:title="<%= snippet.heading%> via  http://www.snippet-monkey.com/" 
+					   addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+					   addthis:description="<%= snippet.description%>"
+					   class="addthis_button_preferred_3">
+					</a>
+					<a  addthis:title="<%= snippet.heading%> via  http://www.snippet-monkey.com/" 
+						addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+						addthis:description="<%= snippet.description%>"
+						class="addthis_button_preferred_4">
+					</a>
+					<a addthis:title="<%= snippet.heading%> via  http://www.snippet-monkey.com/"
+					   addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+					   addthis:description="<%= snippet.description%>"
+					   class="addthis_button_compact">
+					</a>
+					<a addthis:title="<%= snippet.heading%> via  http://www.snippet-monkey.com/"
+					   addthis:url="<%= snippet.absolute_url || snippet_url(snippet)%>"
+					   addthis:description="<%= snippet.description%>"
+					   class="addthis_counter addthis_bubble_style">
+					</a>
+				</div>
+				<!-- AddThis Button END -->
+	<%if snippet.code%>		
+		<div id="snippet_view" class="modal hide fade">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">×</button>
+				<h3>Snippet Code</h3>
+			</div>
+			<div class="modal-body">
+				<div class="well">
+
+				<pre class="prettyprint linenums:1">
+					<%= snippet.code%>
+				</pre>
+				<!-- <pre class="prettyprint linenums:1">
+					<ol class="linenums">
+						<%snippet.code.split("\n").each_with_index do |line, index| %>
+							<li class=<%= "L#{index}"%>><p><%= line%></p></li>
+						<%end%>
+					</ol>
+				</pre> -->
+			</div>
+			</div>
+		</div>
+	<%end%>
+	<%if snippet.description%>		
+		<div id="desc_view" class="modal hide fade">
+			<div class="modal-header">
+				<button class="close" data-dismiss="modal">×</button>
+				<h3>Snippet Description</h3>
+			</div>
+			<div class="modal-body">
+				<div class="well">
+					<%= snippet.description%>
+			</div>
+			</div>
+		</div>
+	<%end%>
+
+					<!-- <%= social_share_button_tag(snippet.heading, :rel => "twipsy", :url => snippet_url(snippet)) %></p> -->
+			       <hr/>
+	    <% end %>
+	  </tbody>
+	</table>
+    <div class="modal hide" id="myModal">
+	    <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal">x</button>
+	    <%= image_tag "monkey_logo.png", :width => "80", :height => "80", :class => "span4"%>
+	    <h3>Login to Snippet Monkey</h3>
+	    </div>
+	    <div class="modal-body">
+	    <form method="post" action='' name="login_form">
+	    <div class="input-prepend">
+	    <p><span class="add-on"><i class="icon-envelope"></i></span><input type="email" class="span9" name="email" id="email" placeholder="Email"></p>
+	    </div>
+	    <div class="input-prepend">
+	    <p><span class="add-on"><i class="icon-certificate"></i></span><input type="password" class="span9" name="password" placeholder="Password"></p>
+	    </div>
+	    <p><button type="submit" class="btn btn-primary">Sign in</button>
+	    <a class="btn btn-primary" data-toggle="modal" href="#password_recovery_modal" >Forgot Password?</a> OR 		    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "facebook.jpg"%></a>
+	    </p>
+	    <!-- <h4>OR</h4><p><%= link_to (image_tag ("facebook.jpg"),:url => user_omniauth_authorize_url(:facebook))%> -->
+	    </form>
+	    </div>
+	    <div class="modal-footer">
+	    <p>
+		    New To Snippet Monkey?
+		    <a class="btn btn-primary" data-toggle="modal" href="#registration_modal" >Register</a>
+		    OR
+		    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "facebook.jpg"%></a>
+	    </p>
+	    
+	    <!-- <p><%= link_to (image_tag ("facebook.jpg"),:url => user_omniauth_authorize_url(:facebook))%><button type="submit" class="btn btn-primary">Sign Up</button> -->	    <!-- <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %> -->
+	    </div>
+    </div>
+	<%= render "layouts/pagination"%>
+<%end%>
+<script>
+$(document).ready(function(){
+	var elem = $("#chars");
+	$("#new_message").limiter(320, elem);
+});
+		(function($) {
+	    $.fn.extend( {
+	        limiter: function(limit, elem) {
+	            $(this).on("keyup focus", function() {
+	                setCount(this, elem);
+	            });
+	            function setCount(src, elem) {
+	                var chars = src.value.length;
+	                if (chars > limit) {
+	                    src.value = src.value.substr(0, limit);
+	                    chars = limit;
+	                }
+	                elem.html( limit - chars );
+	            }
+	            setCount($(this)[0], elem);
+	        }
+	    });
+	})(jQuery);
+
+</script>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51078afc42a872c8"></script>
+
+
+<script type="text/javascript">
+// Alert a message when the user shares somewhere
+function eventHandler(evt) { 
+    switch (evt.type) {
+        case "addthis.menu.open":
+            console.log('menu opened; surface=' + evt.data.pane);
+            break;
+        case "addthis.menu.close":
+            console.log('menu closed; surface=' + evt.data.pane);
+            break;
+        case "addthis.menu.share":
+            console.log('user shared to ' + evt.data.service);
+			$.ajax({
+						type: "POST",
+						beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));},
+						url: 'snippet/share_count',
+						data: {url: evt.data.url},
+						success: function(msg){
+							console.log("Success")
+							//$("#alert_success").html("Successfully shared the resource.")
+							//$("#alert_success").show()
+						},
+						error: function(msg){
+							//$("#alert_error").html("OOps! something went wrong. Unable to share at this point :(")
+							//$("#alert_error").show()
+						}
+					});
+            break;
+        default:
+            console.log('received an unexpected event', evt);
+    }
+    
+    if (evt.type == 'addthis.menu.share') { 
+         console.log(evt); // evt.data.service is specific to the "addthis.menu.share" event
+		$.ajax({
+					type: "POST",
+					beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));},
+					url: 'snippet/share_count',
+					data: {url: evt.data.url},
+					success: function(msg){
+						console.log("Success")
+						//$("#alert_success").html("Successfully shared the resource.")
+						//$("#alert_success").show()
+					},
+					error: function(msg){
+						//$("#alert_error").html("OOps! something went wrong. Unable to share at this point :(")
+						//$("#alert_error").show()
+					}
+				});
+    }
+}
+
+// Listen to various events
+addthis.addEventListener('addthis.menu.open', eventHandler);
+addthis.addEventListener('addthis.menu.close', eventHandler);
+addthis.addEventListener('addthis.menu.share', eventHandler);
+</script>
+
+	
+<%end%>

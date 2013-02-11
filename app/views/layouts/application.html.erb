@@ -30,6 +30,9 @@
         <%if user_signed_in?%>
 			<%= render 'layouts/navigation'%>
 		<%end%>
+    	<%unless user_signed_in?%>
+    		<a class="btn btn-primary pull-right" data-toggle="modal" href="#myModal" style="margin-top: 36px;margin-right: 56px;">Sign In</a>
+    	<%end%>
       </div>
     </div>
   </div>
@@ -41,8 +44,10 @@
 	    	
 	    	<!--Sidebar content-->
 		    <div class="span2">
+		    	<%if params[:controller] == "guest"%>
+		    		<%= image_tag "guest.jpg", :width => "120", :height => "120", :alt => "Upload Image"%>
+		    	<%end%>
 		    	<%unless current_user.blank?%>
-		    	
 			    	<!-- Upload Image is here -->
 					<p><a data-toggle="modal" href="#upload_modal" id="avatar">
 	  	    		<%if current_user.avatar_url%>
@@ -55,17 +60,7 @@
 	  	    		</p>
 	  	    		<hr />
 	    			<p>
-					<!-- AddThis Follow BEGIN -->
-					<p><h6><strong style="padding-left: 5px">Follow Us</strong></h6></p>
-					<p>
-					<div class="addthis_toolbox addthis_32x32_style addthis_default_style">
-					<a class="addthis_button_facebook_follow" addthis:userid="SnippetMonkeyCommunity"></a>
-					<a class="addthis_button_twitter_follow" addthis:userid="YOUR-USERNAME"></a>
-					<a class="addthis_button_google_follow" addthis:userid="YOUR-USERNAME"></a>
-					<a class="addthis_button_pinterest_follow" addthis:userid="YOUR-USERNAME"></a>
-					</div>
-					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-511800945f829635"></script>
-					<!-- AddThis Follow END -->
+					
 					</p>
 	    			<!-- Upload Image Modal is here -->
 					<div id="upload_modal" class="modal hide fade">
@@ -88,6 +83,18 @@
 						</div>
 					</div>
 				<%end%>
+				<hr />
+					<!-- AddThis Follow BEGIN -->
+					<p><h6><strong style="padding-left: 5px">Follow Us</strong></h6></p>
+					<p>
+					<div class="addthis_toolbox addthis_32x32_style addthis_default_style">
+					<a class="addthis_button_facebook_follow" addthis:userid="SnippetMonkeyCommunity"></a>
+					<a class="addthis_button_twitter_follow" addthis:userid="YOUR-USERNAME"></a>
+					<a class="addthis_button_google_follow" addthis:userid="YOUR-USERNAME"></a>
+					<a class="addthis_button_pinterest_follow" addthis:userid="YOUR-USERNAME"></a>
+					</div>
+					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-511800945f829635"></script>
+					<!-- AddThis Follow END -->
 		    </div>
 		    
 		    <vr class="leftline"></vr>

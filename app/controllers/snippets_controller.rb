@@ -1,6 +1,6 @@
 class SnippetsController < ApplicationController
   
-  before_filter :authenticate_user!#, :except => :create
+  before_filter :authenticate_user!#, :except => :guest
   # GET /snippets
   # GET /snippets.json
   def index

@@ -39,6 +39,8 @@ SniptMonkey::Application.routes.draw do
  get "/page_not_found.html", :to => "users/activities#page_not_found"
  end
  match 'snippet/share_count', :to => "snippets#resource_share_count", :via => :post
+ match "user/guest", :to => "guest#index"
+ match "guest/snippet/show/:id", :to => "guest#show", :as => :guest_snippet_show
  root :to => 'snippets#index'
  match '*a' => 'snippets#index'
   # The priority is based upon order of creation:
