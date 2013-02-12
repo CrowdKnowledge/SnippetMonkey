@@ -10,27 +10,23 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>http://www.snippet-monkey.com/about_us</loc>
+  <loc>http://www.snippet-monkey.com/guest/about_us</loc>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.snippet-monkey.com/privacy_policy</loc>
+  <loc>http://www.snippet-monkey.com/intro</loc>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.snippet-monkey.com/license</loc>
+  <loc>http://www.snippet-monkey.com/user/guest</loc>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.snippet-monkey.com/snippets?mode=space</loc>
+  <loc>http://www.snippet-monkey.com/guest/license</loc>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.snippet-monkey.com/users/profile</loc>
+  <loc>http://www.snippet-monkey.com/guest/privacy_policy</loc>
   <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.snippet-monkey.com/snippets/new</loc>
-  <priority>0.60</priority>
 </url>
 </urlset>
