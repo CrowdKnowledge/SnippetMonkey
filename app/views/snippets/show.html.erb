@@ -32,39 +32,37 @@
 							<div class="span3">
 								<p class="lead"> <h4>Technology :	</h4></p>
 								<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-warning"><%= @snippet.technology.name%></span></p>
-								<p><%= image_tag @snippet.technology.icon_path%></p>						
+								<p><%= image_tag @snippet.technology.icon_path, :width => "80", :height => "80"%></p>						
 							</div><br /><br />
 							<div class="span9">
 								<p><strong>Actions : </strong>
-										<%if @snippet.user_id == current_user.id%>
+										<%if current_user && @snippet.user_id == current_user.id%>
 								    		<a href=<%= edit_snippet_path(@snippet)%>><i class="icon-edit"></i><span class="label label-info"></span> </a> 
 								    		<a href=<%= delete_resource_snippet_path(@snippet)%>><i class="icon-trash"></i><span class="label label-info"></span> </a> 
 								    	<%end%>
-								    	<a id="comment_icon" data-toggle="modal" href="#comment_modal"><i class="icon-comment"></i><span class="label label-info"></span> </a>
-								    	| <i class="icon-user"></i> <a href="#"><%= @snippet.user.first_name%></a> 
+								    	<a id="comment_icon" data-toggle="modal" href="#comment_modal_<%= @snippet.id%>"><i class="icon-comment"></i><span class="label label-info"></span> </a>
+								    	| <i class="icon-user"></i> <a href="/users/public_profile/<%= @snippet.user_id%>"><%= @snippet.user.first_name%></a> 
 								    	| <i class="icon-calendar"></i> <%= @snippet.created_at.strftime("%B %d, %Y %T")%>
 								     	| <i class="icon-comment"></i> <a href="<%= show_comments_snippet_path(@snippet)%>"><%= @snippet.comments.size%> Comments</a>
-								       	| <i class="icon-share"></i> <a href="#">39 Shares</a>
+								       	| <i class="icon-share"></i> <a href="#" id="share"><%= @snippet.share_count%> Shares</a>
 								</p>
 
-								<div id="comment_modal" class="modal hide fade">
+								<div id="comment_modal_<%= @snippet.id%>" class="modal hide fade">
 									<div class="modal-header">
 									<button class="close" data-dismiss="modal">×</button>
 									<h3>Type a Comment</h3>
 									</div>
 									<div class="modal-body">
-									    <div class="span4 well">
-									    <form accept-charset="UTF-8" action="<%= add_snippet_comment_snippet_path(@snippet)%>" method="POST">
-									    <textarea class="span4" id="new_message" name="message"
-									    placeholder="Type in your comment" rows="5"></textarea>
-									    <h6 class="pull-right">Remaining<div id="chars">320</div></h6>
+									    <div class="well">
+									    <form accept-charset="UTF-8" action="<%= add_snippet_comment_snippet_path(@snippet.id)%>" method="POST">
+									    <textarea id="new_message" name="message"
+									    placeholder="Type in your comment" rows="10" ></textarea>
+									    <h6 class="pull-right">Remaining<div id="chars">320</div></h6><br />
 									    <button class="btn btn-info" type="submit">Post Comment</button>
 									    </form>
 									    </div>
 									</div>
 								</div>
-
-
 
 							</div>
 						</div>
@@ -102,12 +100,143 @@
 					</a>
 				</div>
 				<!-- AddThis Button END -->
-				<p>
-					<%if @snippet.code%>
+				<div class="span9"> <hr/></div>
+				<!-- AddThis Button END -->
+				
+				<%if @snippet.code%>
+				</p>
 				<pre class="prettyprint linenums:1">
 					<%= @snippet.code%>
 				</pre>		
-					<%end%>
 				</p>
-			      <div class="span9"> <hr/></div>
+			    <%end%>
+			    
+				<!-- AddThis Button END -->
+				<p>
+				<%unless @snippet.comments.blank?%>
+				<table class="table table-striped">
+				  <thead>
+				    <tr>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <th></th>
+				      <!-- <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <% @snippet.comments.each do |comment| %>
+						      <tr>
+						      		<div class="row" style="padding-left: 100px;">
+						      			<td>
+											<div class="span3">
+												<p class="lead"> <%= image_tag comment.user.avatar_url, :width => "64", :height => "64"%>	</p>
+												<p class="text-info">
+													<%= comment.user.full_name%>
+												</p>
+											</div>
+										</td>
+						      			<td>
+											<div class="span4">
+												<p class="lead"> <h5>Comment:	</h5></p>
+												<p class="text-info">
+													<%= comment.message%>
+												</p>
+											</div>
+										</td>
+									</div>
+							  </tr>
+					<%end%>
+					</tbody>
+				</table>
+				<%end%>
+				</p>
 
+<script>
+$(document).ready(function(){
+	var elem = $("#chars");
+	$("#new_message").limiter(320, elem);
+});
+		(function($) {
+	    $.fn.extend( {
+	        limiter: function(limit, elem) {
+	            $(this).on("keyup focus", function() {
+	                setCount(this, elem);
+	            });
+	            function setCount(src, elem) {
+	                var chars = src.value.length;
+	                if (chars > limit) {
+	                    src.value = src.value.substr(0, limit);
+	                    chars = limit;
+	                }
+	                elem.html( limit - chars );
+	            }
+	            setCount($(this)[0], elem);
+	        }
+	    });
+	})(jQuery);
+
+</script>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51078afc42a872c8"></script>
+
+
+<script type="text/javascript">
+// Alert a message when the user shares somewhere
+function eventHandler(evt) { 
+    switch (evt.type) {
+        case "addthis.menu.open":
+            console.log('menu opened; surface=' + evt.data.pane);
+            break;
+        case "addthis.menu.close":
+            console.log('menu closed; surface=' + evt.data.pane);
+            break;
+        case "addthis.menu.share":
+            console.log('user shared to ' + evt.data.service);
+			$.ajax({
+						type: "POST",
+						beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));},
+						url: 'snippet/share_count',
+						data: {url: evt.data.url},
+						success: function(msg){
+							console.log("Success")
+							//$("#alert_success").html("Successfully shared the resource.")
+							//$("#alert_success").show()
+						},
+						error: function(msg){
+							//$("#alert_error").html("OOps! something went wrong. Unable to share at this point :(")
+							//$("#alert_error").show()
+						}
+					});
+            break;
+        default:
+            console.log('received an unexpected event', evt);
+    }
+    
+    if (evt.type == 'addthis.menu.share') { 
+         console.log(evt); // evt.data.service is specific to the "addthis.menu.share" event
+		$.ajax({
+					type: "POST",
+					beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));},
+					url: 'snippet/share_count',
+					data: {url: evt.data.url},
+					success: function(msg){
+						console.log("Success")
+						//$("#alert_success").html("Successfully shared the resource.")
+						//$("#alert_success").show()
+					},
+					error: function(msg){
+						//$("#alert_error").html("OOps! something went wrong. Unable to share at this point :(")
+						//$("#alert_error").show()
+					}
+				});
+    }
+}
+
+// Listen to various events
+addthis.addEventListener('addthis.menu.open', eventHandler);
+addthis.addEventListener('addthis.menu.close', eventHandler);
+addthis.addEventListener('addthis.menu.share', eventHandler);
+</script>
