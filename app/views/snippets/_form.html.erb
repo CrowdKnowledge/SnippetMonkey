@@ -55,10 +55,14 @@
 	<div class="control-group">
 		<label for="security" class="control-label">Privacy Type *</label>
 		<div class="btn-group" data-toggle-name="security" data-toggle="buttons-radio" >
-		  <button type="button" value="public" class="btn active" data-toggle="button">public</button>
-		  <button type="button" value="private" class="btn" data-toggle="button">private</button>
+		  <button id="pub" type="button" value="public" class="btn" data-toggle="button">public</button>
+		  <button id="priv" type="button" value="private" class="btn" data-toggle="button">private</button>
 		</div>
-		<input id="privacy_field" type="hidden" name="security" value="public" />
+		<%if @snippet.security.nil?%>
+			<input id="privacy_field" type="hidden" name="security" value="public" />
+		<%else%>
+			<input id="privacy_field" type="hidden" name="security" value="<%= @snippet.security%>" />
+		<%end%>
 	</div>
 
 	<div class="control-group">
@@ -66,8 +70,11 @@
 		<div class="controls">
 		<select class="span4" themeroller="true" less-var="@headingsFontWeight" placeholder="bold" name="technology_id">
 		  <%Technology.all.each do |technology|%>
-		  	<%selected = (@snippet.technology_id == technology.id) ? "selected" : ""%>
-		  	<option value=<%= technology.id%> selected=<%= selected%>><%= technology.name%></option>
+		  	<%if @snippet.technology_id == technology.id%>
+		  		<option value=<%= technology.id%> selected><%= technology.name%></option>
+		  	<%else%>
+		  		<option value=<%= technology.id%>><%= technology.name%></option>
+		  	<%end%>
 		  <%end%>
 		</select>
 		</div> 
@@ -107,5 +114,16 @@
 	             matchBrackets : true
 	         });
 	     })
+	     
+		$("div.btn-group button").click(function() {
+		  $("div.btn-group button").not(this).removeClass("active");
+		  $(this).toggleClass("active");
+		});
+		
+		<%if @snippet.security == "private"%>
+			$("#priv").addClass("active");
+		<%else%>
+			$("#pub").addClass("active");
+		<%end%>
 	})
 </script>
