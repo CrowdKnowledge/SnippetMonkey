@@ -14,6 +14,9 @@ SniptMonkey::Application.routes.draw do
   match '/about_us', :to => "snippets#about_us", :via => :get
   match '/privacy_policy', :to => "snippets#privacy_policy", :via => :get
   match '/license', :to => "snippets#license", :via => :get
+  match 'guest/about_us', :to => "guest#about_us", :via => :get
+  match 'guest/privacy_policy', :to => "guest#privacy_policy", :via => :get
+  match 'guest/license', :to => "guest#license", :via => :get
   devise_for :users, :controllers => { :sessions => "users/sessions" , :registrations => "users/registrations", :omniauth_callbacks => "omniauth_callbacks", :activities => "users/activities"}
  devise_scope :user do
    post '/users/upload_avatar' => 'users/activities#upload_avatar'
