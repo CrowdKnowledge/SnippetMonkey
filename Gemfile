@@ -12,6 +12,8 @@ gem 'rails', '3.2.11'
  gem 'meta_request', '0.2.0'
 # Gems used only for assets and not required
 # in production environments by default.
+gem 'libv8', '~> 3.3.10', :platforms => :ruby
+gem 'therubyracer', '0.10.2', :require => 'v8', :platforms => :ruby
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -23,7 +25,6 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 gem 'jquery-rails'
-gem 'therubyracer'
 gem 'pg'
 gem 'mysql2'
 gem "grabzit", "~> 1.1.0"
@@ -47,6 +48,8 @@ gem "fog", "~> 1.3.1"
 gem "hpricot", "~> 0.8.6"
 gem "metamagic", "~> 2.0.5"
 gem 'rails_exception_handler', "~> 2"
+gem 'rake', "~> 10.0.3"
+gem "passenger"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
