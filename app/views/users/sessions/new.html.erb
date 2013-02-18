@@ -2,13 +2,24 @@
 	<div class="alert alert-info">
 		<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
 		<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
-	<%= image_tag "monkey_logo_new.png", :width => "70%", :height => "70%"%>
+	<table>
 	<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
-		<br />&nbsp;<a class="btn btn-primary" data-toggle="modal" href="#myModal" style="margin-left: 305px; margin-top: -381px;">Wana Join?</a>
-		<strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong>
-		<a class="btn btn-primary" href="https://s3.amazonaws.com/snippet-monkey/intro.html" style="margin-bottom: 21px; margin-top: -361px;" target="_blank">Know About Me?</a><br />
-		<p><a class="btn btn-primary" href="/user/guest" style="margin-bottom: 21px; margin-top: -288px;margin-left: 361px;" target="_blank">Guest Session</a></p>
+		<tr>
+			<td>
+				<a class="btn btn-primary" href="https://s3.amazonaws.com/snippet-monkey/intro.html" style="" target="_blank">Know About Me</a>
+			</td>
+			<td>
+				<a class="btn btn-primary" data-toggle="modal" href="#myModal" style="left: 70%; top: 50%;">Wana Join?</a>
+			</td>
+			<td>
+				<a class="btn btn-primary" href="/user/guest" style="" target="_blank">Guest Session</a>
+			</td>
+		</tr>
 	<%end%>
+		<tr>
+			<%= image_tag "monkey_logo_new.png", :width => "70%", :height => "70%"%>
+		</tr>
+	</table>
 	</div>     
     <div class="modal hide" id="myModal">
 	    <div class="modal-header">
@@ -25,7 +36,7 @@
 	    <p><span class="add-on"><i class="icon-certificate"></i></span><input type="password" class="span9" name="password" placeholder="Password"></p>
 	    </div>
 	    <p><button type="submit" class="btn btn-primary">Sign in</button>
-	    <a class="btn btn-primary" data-toggle="modal" href="#password_recovery_modal" >Forgot Password?</a> OR 		    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "facebook.jpg"%></a>
+	    <a class="btn btn-primary" data-toggle="modal" href="#password_recovery_modal" >Forgot Password?</a> OR <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "fb.png"%></a>
 	    </p>
 	    <!-- <h4>OR</h4><p><%= link_to (image_tag ("facebook.jpg"),:url => user_omniauth_authorize_url(:facebook))%> -->
 	    </form>
@@ -35,7 +46,7 @@
 		    New To Snippet Monkey?
 		    <a class="btn btn-primary" data-toggle="modal" href="#registration_modal" >Register</a>
 		    OR
-		    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "facebook.jpg"%></a>
+		    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "fb.png"%></a>
 	    </p>
 	    
 	    <!-- <p><%= link_to (image_tag ("facebook.jpg"),:url => user_omniauth_authorize_url(:facebook))%><button type="submit" class="btn btn-primary">Sign Up</button> -->	    <!-- <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %> -->

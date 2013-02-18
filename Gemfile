@@ -10,6 +10,8 @@ gem 'rails', '3.2.11'
  gem "better_errors"
  gem "binding_of_caller"
  gem 'meta_request', '0.2.0'
+ gem 'libv8', '~> 3.3.10', :platforms => :ruby
+ gem 'therubyracer', '0.10.2', :require => 'v8', :platforms => :ruby
 # Gems used only for assets and not required
 # in production environments by default.
 gem 'libv8', '~> 3.3.10', :platforms => :ruby

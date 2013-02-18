@@ -39,7 +39,7 @@
   <br />
   
   <!-- Container layout Starts here -->
-    <div class="container-fluid" style="padding-top: 130px">
+    <div class="container-fluid">
 	    <div class="row-fluid">
 	    	
 	    	<!--Sidebar content-->
@@ -101,7 +101,7 @@
 		    
 		    <!-- Middle container goes here-->
 		    <div class="span10">
-			    <div class="span10" style="margin-left: -14px;">
+			    <div class="span10" style="left: auto;">
 					
 					<!-- Middle container data-->
 				    <%flash.map do |key,value|%>
@@ -132,7 +132,6 @@
 				 	<%= yield :session_out_view%>
 				   <%end%>	
 			    </div>
-			    <vr class="rightline"></vr>
 			    
 			    <!--Monkey sketch and Chat section-->
 			    <div class="span2" style="padding-left: 25px;">

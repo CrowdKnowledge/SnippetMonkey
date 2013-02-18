@@ -180,7 +180,9 @@
 	    <div class="input-prepend">
 	    <p><span class="add-on"><i class="icon-certificate"></i></span><input type="password" class="span9" name="password" placeholder="Password"></p>
 	    </div>
+	    <div class="span2">
 	    <p><button type="submit" class="btn btn-primary">Sign in</button>
+	    </div>
 	    <a class="btn btn-primary" data-toggle="modal" href="#password_recovery_modal" >Forgot Password?</a> OR 		    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "facebook.jpg"%></a>
 	    </p>
 	    <!-- <h4>OR</h4><p><%= link_to (image_tag ("facebook.jpg"),:url => user_omniauth_authorize_url(:facebook))%> -->
