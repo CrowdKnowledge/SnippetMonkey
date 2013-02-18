@@ -50,9 +50,9 @@ gem "fog", "~> 1.3.1"
 gem "hpricot", "~> 0.8.6"
 gem "metamagic", "~> 2.0.5"
 gem 'rails_exception_handler', "~> 2"
-gem 'rake', "~> 10.0.3"
+#gem 'rake', "~> 10.0.3"
 gem "passenger"
-gem "net-scp"
+#gem "net-scp"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
