@@ -142,6 +142,7 @@ GEM
     multi_json (1.6.1)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
+    net-scp (1.0.6)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.5)
     nokogiri (1.5.6)
@@ -267,7 +268,6 @@ DEPENDENCIES
   progress_bar
   rails (= 3.2.11)
   rails_exception_handler (~> 2)
-  rake (~> 10.0.3)
   rmagick (~> 2.13.1)
   sass-rails (~> 3.2.3)
   social-share-button
