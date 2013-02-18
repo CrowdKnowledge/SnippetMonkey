@@ -142,7 +142,6 @@ GEM
     multi_json (1.6.1)
     multipart-post (1.1.5)
     mysql2 (0.3.11)
-    net-scp (1.0.6)
       net-ssh (>= 2.6.5)
     net-ssh (2.6.5)
     nokogiri (1.5.6)
