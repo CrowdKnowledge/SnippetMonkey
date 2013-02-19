@@ -2,24 +2,7 @@
 	<div class="alert alert-info">
 		<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
 		<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
-	<table>
-	<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
-		<tr>
-			<td>
-				<a class="btn btn-primary" href="https://s3.amazonaws.com/snippet-monkey/intro.html" style="" target="_blank">Know About Me</a>
-			</td>
-			<td>
-				<a class="btn btn-primary" data-toggle="modal" href="#myModal" style="left: 70%; top: 50%;">Wana Join?</a>
-			</td>
-			<td>
-				<a class="btn btn-primary" href="/user/guest" style="" target="_blank">Guest Session</a>
-			</td>
-		</tr>
-	<%end%>
-		<tr>
-			<%= image_tag "monkey_logo_new.png", :width => "70%", :height => "70%"%>
-		</tr>
-	</table>
+		<p><%= image_tag "monkey_logo_new.png", :width => "70%", :height => "70%"%></p>
 	</div>     
     <div class="modal hide" id="myModal">
 	    <div class="modal-header">
