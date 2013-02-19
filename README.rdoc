@@ -34,8 +34,14 @@ Thanks to the technologists:
 
     Twitter Bootstrap by Seyhun Akyürek
     Ruby on Rails by David Heinemeier Hansson
-    Qburst - My Spirit and Passion
+    Qburst - My Spirit and Passion (http://www.qburst.com)
 
 Creator of Twitter Bootstrap Railsform builder for allowing me to use it here, (his GitHub repo)
 
-Qburst! A team of innovative technologists working in mobile and web domain. Read the vision of Qburst here.
+Qburst! A team of innovative technologists working in mobile and web domain. Read the vision of Qburst here(http://www.qburst.com).
+
+== Upcoming Features
+    
+1. Chat with developers and technologists in technology wise chat rooms.
+2. Ask a technlogy expert about a potential query.
+3. Rate and vote developers with exact Snippets.
