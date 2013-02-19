@@ -12,10 +12,10 @@ development:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: snippet_monkey_development
+  database: snippetmonkey
   pool: 5
-  username: root
-  password: qburst
+  username: adminH25IXhX
+  password: S_pskY__VP5U
   socket: /var/run/mysqld/mysqld.sock
 # development:
   # adapter: postgresql
@@ -34,10 +34,10 @@ test:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: snippet_monkey_development
+  database: snippetmonkey
   pool: 5
-  username: root
-  password: qburst
+  username: adminH25IXhX
+  password: S_pskY__VP5U
   socket: /var/run/mysqld/mysqld.sock
   
 # test:
@@ -53,10 +53,10 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: snippet_monkey_development
+  database: snippetmonkey
   pool: 5
-  username: root
-  password: qburst
+  username: adminH25IXhX
+  password: S_pskY__VP5U
   socket: /var/run/mysqld/mysqld.sock
 
 # production:
