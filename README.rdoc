@@ -18,14 +18,14 @@ You might have come across situations where you resolve some bug using some snip
 = Core Features
 
 Features:
-=> Save URLs and Snippets.
-=> Search Resources.
-=> Share Resources.
-=> Access Resources Anywhere & Anytime.
-=> Guest session to view the snippets.
-=> BOOKMARK Online!
+1. Save URLs and Snippets.
+2. Search Resources.
+3. Share Resources.
+4. Access Resources Anywhere & Anytime.
+5. Guest session to view the snippets.
+6. BOOKMARK Online!
 
-= Supporting Technologies
+== Supporting Technologies
 
 Bootstrap the power behind the design!
 
