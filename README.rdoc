@@ -1,4 +1,4 @@
-== Welcome to SnippetMonkey
+== Welcome to SnippetMonkey (http://www.snippet-monkey.com)
 
 Snippet-Monkey helps developers to store their URLs, Code snippets etc online and access, search and use them quickly.
 Have you ever thought? oh! I had solved this issue before using a blog but can't find it again :(
