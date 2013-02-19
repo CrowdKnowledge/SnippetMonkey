@@ -34,8 +34,8 @@
     		<ul class="nav" style="padding-top: 25px;">
     		<li class=""><a data-toggle="modal" href="#myModal"><i class="icon-leaf"></i> Sign In</a></li>
     		<%if params[:controller] == "users/sessions" && params[:action] == "new"%>
-    		<li><a class="" href="https://s3.amazonaws.com/snippet-monkey/intro.html" target="_blank"><i class="icon-signal"></i>Know About Me</a></li>
-			<li><a class="" href="/user/guest" target="_blank"><i class="icon-star"></i>Guest Session</a></li>
+    		<li><a class="" href="https://s3.amazonaws.com/snippet-monkey/intro.html" target="_blank"><i class="icon-signal"></i> About Me</a></li>
+			<li><a class="" href="/user/guest" target="_blank"><i class="icon-star"></i> Guest Session</a></li>
 			<%end%>
 			</ul>
     	<%end%>
@@ -92,7 +92,7 @@
 				<hr />
 					<!-- AddThis Follow BEGIN -->
 					<div class="addthis_toolbox addthis_vertical_style" style="padding-left: 25px;">
-					<%= image_tag "Twitter-Follow-Me.png"%>
+					<%= image_tag "Twitter-Follow-Me.png", :width => "90"%>
                    	<a class="addthis_button_facebook_follow" addthis:userid="pages/Snippet-Monkey/142881969208093"></a><br />
 					<a class="addthis_button_twitter_follow" addthis:userid="SnippetTeam"></a><br />
 					<a class="addthis_button_google_follow" addthis:userid="YOUR-USERNAME"></a><br />
