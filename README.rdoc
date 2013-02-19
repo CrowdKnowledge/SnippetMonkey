@@ -1,5 +1,41 @@
 == Welcome to SnippetMonkey
 
-Have you ever thought? oh! I had solved this issue before using a blog but can't find it again :( Don't worry, start using Snippet Monkey to back up your resource URLs here for future development. You can search and find or share it with your friends when you come across the same issue again.
+Snippet-Monkey helps developers to store their URLs, Code snippets etc online and access, search and use them quickly.
+Have you ever thought? oh! I had solved this issue before using a blog but can't find it again :(
+Don't worry, start using Snippet Monkey to back up your resource URLs here for future development.
+You can search and find or share it with your friends when you come across the same issue again. 
 
+== About Me
 
+What is this?
+
+Snippet Monkey Favicon is a Ruby on Rails based web application developed for "developers". This application can be used by developers for storing the URLs of blogs or snippets from blogs for future development use.
+
+Snippet was created by Snippet Team. The source is available as open-source in Github here.
+
+You might have come across situations where you resolve some bug using some snippet or blog and encounters the same bug after a few months. Unfortunately you are on a different development machine and you are unable to find the resource by searching it on web again. Snippet Monkey Favicon comes handy in such situations. Just save your resource URL or Snippet into this portal with a heading tag. Any its webified for ever to be accessed from anywhere and any time.
+
+= Core Features
+
+Features:
+=> Save URLs and Snippets.
+=> Search Resources.
+=> Share Resources.
+=> Access Resources Anywhere & Anytime.
+=> Guest session to view the snippets.
+=> BOOKMARK Online!
+
+= Supporting Technologies
+
+Bootstrap the power behind the design!
+
+Heavily scalable Ruby on Rails Framework that is such a joy to code with
+Thanks to the technologists:
+
+    Twitter Bootstrap by Seyhun Akyürek
+    Ruby on Rails by David Heinemeier Hansson
+    Qburst - My Spirit and Passion
+
+Creator of Twitter Bootstrap Railsform builder for allowing me to use it here, (his GitHub repo)
+
+Qburst! A team of innovative technologists working in mobile and web domain. Read the vision of Qburst here.
