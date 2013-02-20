@@ -166,7 +166,7 @@
 	    <% end %>
 	  </tbody>
 	</table>
-    <div class="modal hide" id="myModal">
+   <div class="modal hide" id="myModal">
 	    <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">x</button>
 	    <%= image_tag "monkey_logo.png", :width => "80", :height => "80", :class => "span4"%>
@@ -175,14 +175,12 @@
 	    <div class="modal-body">
 	    <form method="post" action='' name="login_form">
 	    <div class="input-prepend">
-	    <p><span class="add-on"><i class="icon-envelope"></i></span><input type="email" class="span9" name="email" id="email" placeholder="Email"></p>
+	    <p><span class="add-on"><i class="icon-envelope"></i></span><input type="email" class="span12" name="email" id="email" placeholder="Email"></p>
 	    </div>
 	    <div class="input-prepend">
-	    <p><span class="add-on"><i class="icon-certificate"></i></span><input type="password" class="span9" name="password" placeholder="Password"></p>
+	    <p><span class="add-on"><i class="icon-certificate"></i></span><input type="password" class="span12" name="password" placeholder="Password"></p>
 	    </div>
-	    <div class="span2">
 	    <p><button type="submit" class="btn btn-primary">Sign in</button>
-	    </div>
 	    <a class="btn btn-primary" data-toggle="modal" href="#password_recovery_modal" >Forgot Password?</a> OR 		    <a href="<%= user_omniauth_authorize_path(:facebook)%>"><%= image_tag "facebook.jpg"%></a>
 	    </p>
 	    <!-- <h4>OR</h4><p><%= link_to (image_tag ("facebook.jpg"),:url => user_omniauth_authorize_url(:facebook))%> -->
@@ -199,6 +197,79 @@
 	    <!-- <p><%= link_to (image_tag ("facebook.jpg"),:url => user_omniauth_authorize_url(:facebook))%><button type="submit" class="btn btn-primary">Sign Up</button> -->	    <!-- <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %> -->
 	    </div>
     </div>
+<div id="registration_modal" class="modal hide fade">
+	<div class="modal-header">
+	<button class="close" data-dismiss="modal">×</button>
+	<h3>Sign Up for Snippet Monkey</h3>
+	</div>
+	<div class="modal-body">
+	<div class="row-fluid">
+	<div class="span12">
+	<div class="span6">
+	<div class="logowrapper">
+		<%= image_tag "CodeMonkeySketch.jpg", :class => "logoicon", :alt => "Snippet Monkey"%>
+	</div>
+	</div>
+	<div class="span6">
+	<form name="signup"  method="post" action="/user/sign_up" class="form-horizontal">
+		<p class="help-block">First Name</p>
+		<div class="input-prepend">
+		<span class="add-on"><i class="icon-user"></i></span><input class="prependedInput" size="16" type="text" name="first_name">
+		</div>
+		<p class="help-block">Last Name</p>
+		<div class="input-prepend">
+		<span class="add-on"><i class="icon-user"></i></span><input class="prependedInput" size="16" type="text" name="last_name">
+		</div>
+		<p class="help-block">Email</p>
+		<div class="input-prepend">
+		<span class="add-on"><i class="icon-envelope"></i></span><input class="prependedInput" size="16" type="email" name="email">
+		</div>
+		<p class="help-block">Password</p>
+		<div class="input-prepend">
+		<span class="add-on"><i class="icon-certificate"></i></span><input class="prependedInput" size="16" type="password" name="password">
+		</div>
+		<hr>
+		<div class="help-block">
+		<button type="submit" class="btn btn-large btn-info">Add Me, Monkey!</button>
+		</div>
+	</form>
+	</div>
+	</div>
+	</div>
+	</div>
+</div>
+
+
+
+<div id="password_recovery_modal" class="modal hide fade">
+	<div class="modal-header">
+	<button class="close" data-dismiss="modal">×</button>
+	<h3>Forgot Your Password?</h3>
+	</div>
+	<div class="modal-body">
+	<div class="row-fluid">
+	<div class="span12">
+	<div class="span6">
+	<div class="logowrapper">
+		<%= image_tag "forgot_password.gif", :class => "logoicon", :alt => "Snippet Monkey"%>
+	</div>
+	</div>
+	<div class="span6">
+	<form name="recover_password"  method="post" action="/user/recover_password" class="form-horizontal">
+		<p class="help-block">Recovery Email</p>
+		<div class="input-prepend">
+		<span class="add-on"><i class="icon-envelope"></i></span><input class="prependedInput" size="16" type="email" name="email">
+		</div>
+		<hr>
+		<div class="help-block">
+		<button type="submit" class="btn btn-large btn-info">Remind Me, Monkey!</button>
+		</div>
+	</form>
+	</div>
+	</div>
+	</div>
+	</div>
+</div>
 	<%= render "layouts/pagination"%>
 <%end%>
 <script>
