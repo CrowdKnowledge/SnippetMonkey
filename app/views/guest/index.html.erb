@@ -37,7 +37,7 @@
 				 		<div class="row">
 				 			<p class="text-info">
 								<h2><%= image_tag "face-monkey.png"%>
-									<%= link_to truncate(snippet.heading.camelize, :length => 12, :omission => '...(continued)'), guest_snippet_show_path(snippet), :class => "text-info"%>
+									<%= link_to truncate(snippet.heading.camelize, :length => 40, :omission => '...(more)'), guest_snippet_show_path(snippet), :class => "text-info"%>
 							        <%if snippet.security == "public"%>
 							        	<span class="label label-success"><%= snippet.security%></span>
 							       	<%else%>
