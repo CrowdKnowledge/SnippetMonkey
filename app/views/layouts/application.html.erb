@@ -50,7 +50,7 @@
 	    	
 	    	<!--Sidebar content-->
 		    <div class="span2">
-		    	<%if params[:controller] == "guest"%>
+		    	<%if params[:controller] == "guest" && current_user.blank?%>
 		    		<%= image_tag "guest.jpg", :width => "120", :height => "120", :alt => "Upload Image"%>
 		    		<br /><hr />
 		    	<%end%>
