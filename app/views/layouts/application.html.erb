@@ -52,22 +52,22 @@
 		    <div class="span2">
 		    	<%if params[:controller] == "guest"%>
 		    		<%= image_tag "guest.jpg", :width => "120", :height => "120", :alt => "Upload Image"%>
+		    		<br /><hr />
 		    	<%end%>
 		    	<%unless current_user.blank?%>
 			    	<!-- Upload Image is here -->
 					<p><a data-toggle="modal" href="#upload_modal" id="avatar">
+					<div class=" well thumbnail">
 	  	    		<%if current_user.avatar_url%>
-	  	    			<%= image_tag current_user.avatar_url, :width => "120", :height => "120", :alt => "Upload Image", :style => "margin-left: 2px; padding:4px; border:1px #999999 solid; box-shadow: 0 4px 9px -3px grey;"%>
+	  	    			<%= image_tag current_user.avatar_url, :width => "300", :height => "200", :alt => "Upload Image"%>
 	  	    		<%else%>
-	  	    			<%= image_tag "user_up.png", :width => "120", :height => "120", :alt => "Upload Image"%>
+	  	    			<%= image_tag "user_up.png", :width => "300", :height => "200", :alt => "Upload Image"%>
 	  	    		<%end%>
+	  	    		</div>
 	  	    		</a>
-	  	    		<h6><strong style="padding-left: 22px;">Click To Upload</strong></h6>
+	  	    		<h6><strong style="padding-left: 28px;">Click To Upload</strong></h6>
 	  	    		</p>
 	  	    		<hr />
-	    			<p>
-					
-					</p>
 	    			<!-- Upload Image Modal is here -->
 					<div id="upload_modal" class="modal hide fade">
 						<div class="modal-header">
@@ -89,7 +89,15 @@
 						</div>
 					</div>
 				<%end%>
-				<hr />
+					<div class="well">
+					<ul class="nav nav-list">
+					  
+					  <li class=""><%= image_tag "technews.png", :width => "80", :height => "60"%></li>
+					  <li class=<%= (params[:action] == 'tech_videos') ? "active": ""%>><a href="<%= video_path%>"><i class="icon-facetime-video"></i> Videos Pool</a></li>
+					  <li class=<%= (params[:action] == 'tech_articles') ? "active": ""%>><a href="<%= article_path%>"><i class=" icon-th-list"></i> Articles Pool</a></li>
+					  <li class=<%= (params[:action] == 'tech_news') ? "active": ""%>><a href="<%= news_path%>"><i class="icon-certificate"></i> News Feed Pool</a></li>
+					</ul>
+					</div>				
 					<!-- AddThis Follow BEGIN -->
 					<div class="addthis_toolbox addthis_vertical_style" style="padding-left: 25px;">
 					<%= image_tag "Twitter-Follow-Me.png", :width => "90"%>
@@ -101,6 +109,7 @@
 					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-511800945f829635"></script>
 		<!-- AddThis Follow END -->
 		
+					<hr />
 		    </div>
 		    
 		    <!-- Middle container goes here-->
@@ -134,7 +143,78 @@
 						<%= yield %>
 				   <%else%>
 				 	<%= yield :session_out_view%>
-				   <%end%>	
+				   <%end%>
+				
+				<div class="page-header">
+					<br /> <hr />
+					  <h1><%=t '.title', :default => "Techies Corner: Today's Special" %></h1>
+				</div>
+				<!--Todays Special start-->
+				<%@vd_special = TodaysSpecial.where(:special_type => "video").last%>
+				<%if @vd_special%>
+					<div class="media well">
+						<h3>Video of The Day</h3>
+						<p class="disabled">Created On: <%= DateTime.now.strftime("%B %d, %Y %T")%> | Promoted By: Snippet-Team &nbsp;<%= image_tag "favicon.ico"%></p>
+					  <a class="pull-left" href="#">
+					    <%= raw Video.yt_session.video_by(@vd_special.url.split("?v=")[1]).embed_html %>
+					  </a>
+					  <div class="media-body">
+					    <h4 class="media-heading"><%= @vd_special.title%>
+					    </h4>
+					 
+					    <!-- Nested media object -->
+					    <div class="media">
+							<%= @vd_special.description%><br />
+							<a class="pull-left" href="<%= @vd_special.url%>" target="_blank"><h5>View on Youtube</h5></a>
+					    </div>
+					  </div>
+					</div>
+				<%end%>
+				
+				<%@art_special = TodaysSpecial.where(:special_type => "article").last%>
+				<%if @art_special%>
+					<div class="media well">
+						<h3>Article of The Day</h3>
+						<p class="disabled">Created On: <%= DateTime.now.strftime("%B %d, %Y %T")%> | Promoted By: Snippet-Team&nbsp;<%= image_tag "favicon.ico"%></p>
+					  <a class="pull-left" href="#">
+					  	<%= image_tag @art_special.image, :width => "425", :height => "355"%>
+					  </a>
+					  <div class="media-body">
+					    <h4 class="media-heading"><%= @art_special.title%>
+					    </h4>
+					 
+					    <!-- Nested media object -->
+					    <div class="media">
+					    	<%= @art_special.description%><br />
+					    	<a class="pull-left" href="<%= @art_special.url%>" target="_blank"><h5>Read the Article</h5></a>
+					    </div>
+					  </div>
+					</div>
+				<%end%>
+				
+				<%@nw_special = TodaysSpecial.where(:special_type => "news").last%>
+				<%if @nw_special%>
+					<div class="media well">
+						<h3>News of The Day</h3>
+						<p class="disabled">Created On: <%= DateTime.now.strftime("%B %d, %Y %T")%> | Promoted By: Snippet-Team&nbsp;<%= image_tag "favicon.ico"%></p>
+					  <a class="pull-left" href="#">
+					    <%= image_tag @nw_special.image, :width => "425", :height => "355"%>
+					  </a>
+					  <div class="media-body">
+					    <h4 class="media-heading">
+					    	<%= @nw_special.title%>
+					    	</h4>
+					 
+					    <!-- Nested media object -->
+					    <div class="media">
+					    	<%= @nw_special.description%><br />
+					    	<a class="pull-left" href="<%= @nw_special.url%>" target="_blank"><h5>Read the News</h5></a>
+					    </div>
+					  </div>
+					</div>
+				<%end%>
+				<!--Todays Special Ends-->
+					
 			    </div>
 			    
 			    <!--Monkey sketch and Chat section-->
@@ -242,4 +322,17 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+</script>
+
+
+<script type="text/javascript">
+$(function() {
+	$(".newsticker-jcarousellite").jCarouselLite({
+		vertical: true,
+		hoverPause:true,
+		visible: 3,
+		auto:500,
+		speed:1000
+	});
+});
 </script>

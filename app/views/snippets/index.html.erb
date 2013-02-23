@@ -45,7 +45,7 @@
 	  <tbody>
 	    <% @snippets.each do |snippet| %>
 			      <tr onclick="location.href='<%= snippet_path(snippet)%>'">
-				 		<div class="row">
+				 		<div class="row span12">
 				 			<p class="text-info">
 								<h2><%= image_tag "face-monkey.png"%>
 									<%= link_to truncate(snippet.heading.camelize, :length => 40, :omission => '...(more)'), snippet_path(snippet), :class => "text-info"%>
@@ -121,8 +121,12 @@
 
 
 							</div>
+							
+
 						</div>
-			      </tr>
+						
+						
+				<div class="row span12">
 				<!-- AddThis Button BEGIN -->
 				<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 					<a  addthis:title="<%= snippet.heading%>  via  http://www.snippet-monkey.com/"
@@ -157,6 +161,11 @@
 					</a>
 				</div>
 				<!-- AddThis Button END -->
+				</div>
+				<p></p>
+			       <hr/>						
+			      </tr>
+
 	<%if snippet.code%>		
 		<div id="snippet_view" class="modal hide fade">
 			<div class="modal-header">
@@ -181,7 +190,7 @@
 		</div>
 	<%end%>
 					<!-- <%= social_share_button_tag(snippet.heading, :rel => "twipsy", :url => snippet_url(snippet)) %></p> -->
-			       <hr/>
+
 	    <% end %>
 	  </tbody>
 	</table>

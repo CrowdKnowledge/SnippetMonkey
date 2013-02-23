@@ -79,6 +79,9 @@ class SnippetsController < ApplicationController
         raise "Hey Buddy, Please enter Resource URL or Code Snippet."
       end
       check_resource_url params[:absolute_url]
+      p "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      mmmmmmmmmmmmmmmmm
+      p params[:technology_id]
       @snippet.update_attributes!(:technology_id => params[:technology_id],
                                   :absolute_url => params[:absolute_url],
                                   :description => params[:description],

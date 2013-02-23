@@ -75,6 +75,8 @@ ruby.jpg: ruby-79e0fd23b1f2ae5b8b1abf57f3a0804b.jpg
 ruby/index.jpg: ruby-79e0fd23b1f2ae5b8b1abf57f3a0804b.jpg
 ruby_on_rails.jpg: ruby_on_rails-fedfa7f6fea2c17730d1295a31bc3bb5.jpg
 ruby_on_rails/index.jpg: ruby_on_rails-fedfa7f6fea2c17730d1295a31bc3bb5.jpg
+technews.png: technews-2ad9e49a4971b6096ddb11b6f6ca95a9.png
+technews/index.png: technews-2ad9e49a4971b6096ddb11b6f6ca95a9.png
 test.jpeg: test-a08b8fd29cbdf0961520e25aaf58a8ae.jpeg
 test/index.jpeg: test-a08b8fd29cbdf0961520e25aaf58a8ae.jpeg
 upload_icon.png: upload_icon-d7a6537868226cec40f27c5da8bf8f2e.png
@@ -83,8 +85,8 @@ user.jpg: user-ed97f52099aa430da3e6097b410c55f2.jpg
 user/index.jpg: user-ed97f52099aa430da3e6097b410c55f2.jpg
 user_up.png: user_up-ef61dbe87ea15b856afc112c7730b9b3.png
 user_up/index.png: user_up-ef61dbe87ea15b856afc112c7730b9b3.png
-application.js: application-598559ca27ae9b390caada2febb61abd.js
-application/index.js: application-598559ca27ae9b390caada2febb61abd.js
+application.js: application-d06619cc24b0ebc7944c4ea86322e7e3.js
+application/index.js: application-d06619cc24b0ebc7944c4ea86322e7e3.js
 application.css: application-254f3519f7b8e790ad633cf815ec69d3.css
 application/index.css: application-254f3519f7b8e790ad633cf815ec69d3.css
 jquery-ui/animated-overlay.gif: jquery-ui/animated-overlay-602eee4c79a4796b02bb6442948c9e28.gif

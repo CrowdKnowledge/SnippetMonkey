@@ -52,6 +52,14 @@ gem "metamagic", "~> 2.0.5"
 gem 'rails_exception_handler', "~> 2"
 #gem 'rake', "~> 10.0.3"
 gem "passenger"
+
+gem 'youtube_it'
+gem 'inherited_resources'
+gem 'acts_as_commentable'
+
+group :development, :test do
+  gem 'web-app-theme', '>= 0.6.2'
+end
 #gem "net-scp"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -1,5 +1,8 @@
 SniptMonkey::Application.routes.draw do
   
+  resources :todays_specials
+
+
   resources :snippets do
     member do
       get 'delete_resource'
@@ -44,6 +47,21 @@ SniptMonkey::Application.routes.draw do
  match 'snippet/share_count', :to => "snippets#resource_share_count", :via => :post
  match "user/guest", :to => "guest#index"
  match "guest/snippet/show/:id", :to => "guest#show", :as => :guest_snippet_show
+
+  resources :videos do
+    member do
+      post :add_comment
+    end     
+    new do
+       post :upload
+       get  :save_video
+     end
+  end
+
+  match "videos/:id/add_comment", :to => "videos#add_comment"
+  match "users/techies/videos", :to => "guest#tech_videos", :as => :video
+  match "users/techies/news", :to => "guest#tech_news", :as => :news
+  match "users/techies/articles", :to => "guest#tech_articles", :as => :article
  root :to => 'snippets#index'
  match '*a' => 'snippets#index'
   # The priority is based upon order of creation:
