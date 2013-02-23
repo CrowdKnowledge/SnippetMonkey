@@ -1,0 +1,17 @@
+	<%@videos.each do |video|%>
+		<div class="media well">
+			<h3><%= video.title%></h3>
+			<p class="disabled">Created On: <%= video.created_at.strftime("%B %d, %Y %T")%> | Promoted By: Snippet-Team &nbsp;<%= image_tag "favicon.ico"%></p>
+		  <a class="pull-left" href="#">
+		    <%= raw Video.yt_session.video_by(video.url.split("?v=")[1]).embed_html %>
+		  </a>
+		  <div class="media-body">
+		    <!-- Nested media object -->
+		    <div class="media">
+				<%= video.description%><br />
+				<a class="pull-left" href="<%= video.url%>" target="_blank"><h5>View on Youtube</h5></a>
+		    </div>
+		  </div>
+		</div>
+		<hr />
+	<%end%>

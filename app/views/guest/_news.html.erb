@@ -1,0 +1,17 @@
+	<%@news.each do |news|%>
+		<div class="media well">
+			<h3><%= news.title%></h3>
+			<p class="disabled">Created On: <%= news.created_at.strftime("%B %d, %Y %T")%> | Promoted By: Snippet-Team&nbsp;<%= image_tag "favicon.ico"%></p>
+		  <a class="pull-left" href="#">
+		    <%= image_tag news.image, :width => "425", :height => "355"%>
+		  </a>
+		  <div class="media-body">
+		    <!-- Nested media object -->
+		    <div class="media">
+		    	<%= news.description%><br />
+		    	<a class="pull-left" href="<%= news.url%>" target="_blank"><h5>Read the News</h5></a>
+		    </div>
+		  </div>
+		</div>
+		<hr />
+	<%end%>

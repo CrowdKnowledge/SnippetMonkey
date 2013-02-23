@@ -1,0 +1,31 @@
+<%= content_for :session_out_view do %>
+<h1>Listing todays_specials</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Url</th>
+    <th>Type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @todays_specials.each do |todays_special| %>
+  <tr>
+    <td><%= todays_special.title %></td>
+    <td><%= todays_special.description %></td>
+    <td><%= todays_special.url %></td>
+    <td><%= todays_special.special_type %></td>
+    <td><%= link_to 'Show', todays_special %></td>
+    <td><%= link_to 'Edit', edit_todays_special_path(todays_special) %></td>
+    <td><%= link_to 'Destroy', todays_special, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Todays special', new_todays_special_path %>
+<%end%>

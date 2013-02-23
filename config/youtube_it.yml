@@ -1,0 +1,11 @@
+common: &common
+  dev_key: AI39si5Wc5cct3Tzk3M86KSsQMSNuO30Lc5xOgwXwJOIEZ8GcsUUa319EFGgLWaG-Hu83UVQhEjL9Aa-Z7tKFE1WT-FoRT-w1A
+  username: team.snippet.monkey
+  password: matrixreloaded
+  
+test:
+  <<: *common
+development:
+  <<: *common
+production:
+  <<: *common

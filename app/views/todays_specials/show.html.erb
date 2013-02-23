@@ -1,0 +1,27 @@
+<%= content_for :session_out_view do %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @todays_special.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @todays_special.description %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%= @todays_special.url %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @todays_special.special_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_todays_special_path(@todays_special) %> |
+<%= link_to 'Back', todays_specials_path %>
+<%end%>
