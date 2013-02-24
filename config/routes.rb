@@ -62,6 +62,7 @@ SniptMonkey::Application.routes.draw do
   match "users/techies/videos", :to => "guest#tech_videos", :as => :video
   match "users/techies/news", :to => "guest#tech_news", :as => :news
   match "users/techies/articles", :to => "guest#tech_articles", :as => :article
+  match "techies/todays_special", :to => "guest#todays_special", :as => :special
  root :to => 'snippets#index'
  match '*a' => 'snippets#index'
   # The priority is based upon order of creation:

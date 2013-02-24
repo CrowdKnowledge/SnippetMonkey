@@ -93,9 +93,11 @@
 					<ul class="nav nav-list">
 					  
 					  <li class=""><%= image_tag "technews.png", :width => "80", :height => "60"%></li>
+					  <li class=<%= (params[:action] == 'todays_special') ? "active": ""%>><a href="<%= special_path%>"><i class="icon-bookmark"></i> Today's Special</a></li>
 					  <li class=<%= (params[:action] == 'tech_videos') ? "active": ""%>><a href="<%= video_path%>"><i class="icon-facetime-video"></i> Videos Pool</a></li>
 					  <li class=<%= (params[:action] == 'tech_articles') ? "active": ""%>><a href="<%= article_path%>"><i class=" icon-th-list"></i> Articles Pool</a></li>
 					  <li class=<%= (params[:action] == 'tech_news') ? "active": ""%>><a href="<%= news_path%>"><i class="icon-certificate"></i> News Feed Pool</a></li>
+					
 					</ul>
 					</div>				
 					<!-- AddThis Follow BEGIN -->
