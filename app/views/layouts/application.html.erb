@@ -117,7 +117,6 @@
 		    <!-- Middle container goes here-->
 		    <div class="span10">
 			    <div class="span10">
-					
 					<!-- Middle container data-->
 				    <%flash.map do |key,value|%>
 					    <%if user_signed_in?%>
@@ -158,7 +157,7 @@
 						<h3>Video of The Day</h3>
 						<p class="disabled">Created On: <%= DateTime.now.strftime("%B %d, %Y %T")%> | Promoted By: Snippet-Team &nbsp;<%= image_tag "favicon.ico"%></p>
 					  <a class="pull-left" href="#">
-					    <%= raw Video.yt_session.video_by(@vd_special.url.split("?v=")[1]).embed_html %>
+					    <%#= raw Video.yt_session.video_by(@vd_special.url.split("?v=")[1]).embed_html %>
 					  </a>
 					  <div class="media-body">
 					    <h4 class="media-heading"><%= @vd_special.title%>

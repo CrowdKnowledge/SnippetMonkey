@@ -1,9 +1,26 @@
 <%= content_for :session_out_view do %>
-	<div class="alert alert-info">
+
+    <div id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+    <div class="active item"><%= image_tag "snippet-logo-new.jpg"%></div>
+    <div class="item"><%= image_tag "usage_guide.jpg"%></div>
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+
+	<!-- <div class="alert alert-info">
 		<p><strong>Hey Buddy, Welcome to Snippet Monkey!</strong></p>
 		<p>Start back up your development resources from today. Experience the magic of <strong>Monkey :)</strong></p>
-		<p><%= image_tag "monkey_logo_new.png", :width => "70%", :height => "70%"%></p>
-	</div>     
+		<p><%#= image_tag "monkey_logo_new.png", :width => "70%", :height => "70%"%></p>
+	</div>  -->    
     <div class="modal hide" id="myModal">
 	    <div class="modal-header">
 	    <button type="button" class="close" data-dismiss="modal">x</button>
