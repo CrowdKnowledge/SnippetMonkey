@@ -4,11 +4,13 @@
     <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
     <!-- Carousel items -->
     <div class="carousel-inner">
-    <div class="active item"><%= image_tag "snippet-logo-new.jpg"%></div>
+    <div class="active item"><%= image_tag "fb_200like.jpg"%></div>
     <div class="item"><%= image_tag "usage_guide.jpg"%></div>
+    <div class="item"><%= image_tag "snippet-logo-new.jpg"%></div>
     <%@vd_special = TodaysSpecial.where(:special_type => "video").last%>
     </div>
     <!-- Carousel nav -->
